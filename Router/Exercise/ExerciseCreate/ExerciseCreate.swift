@@ -10,7 +10,6 @@ import UIKit
 
 struct ExerciseCreate: View {
     @State var symbol: String = "figure.walk"
-    @State var symbolColor: Color = .white
     @State var hex: String = ""
     @State var exerciseName: String = ""
     @State var exercisePart: String = ""
@@ -32,7 +31,7 @@ struct ExerciseCreate: View {
                                 Image(systemName:symbol)
                                     .resizable()
                                     .scaledToFit()
-                                    .foregroundColor(symbolColor)
+                                    .foregroundColor(.white)
                                     .padding(20)
                             )
                     }
@@ -45,12 +44,19 @@ struct ExerciseCreate: View {
                     }
                 }
                 .frame(maxHeight: 120)
-                SymbolImageView(color: $symbolColor, symbol: $symbol)
+                SymbolImageView(symbol: $symbol)
                     .padding(.vertical)
                 SymbolColorView(hex: $hex)
                     .padding(.vertical)
             }
             .padding()
+        }
+        .toolbar {
+            ToolbarItem(placement: .navigationBarTrailing) {
+                Button("생성") {
+                    
+                }
+            }
         }
     }
 }
@@ -62,7 +68,6 @@ struct ExerciseCreate_Previews: PreviewProvider {
 }
 
 struct SymbolImageView: View {
-    @Binding var color: Color
     @Binding var symbol: String
     var iconRows: [GridItem] = .init(repeating: GridItem(.adaptive(minimum: UIScreen.main.bounds.height*0.3/6),spacing: 0), count: 5)
     var body: some View {
@@ -71,7 +76,6 @@ struct SymbolImageView: View {
                 Text("아이콘")
                     .font(Font.system(size: 18, weight: .bold, design: .rounded))
                     .foregroundColor(.init(uiColor: .lightGray))
-                ColorPicker("", selection: $color)
                 Spacer()
             }
             ScrollView(.horizontal, showsIndicators: false) {

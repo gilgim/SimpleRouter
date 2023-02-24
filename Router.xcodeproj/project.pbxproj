@@ -14,6 +14,17 @@
 		371C738229A4AFB200FA1E22 /* RouterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371C738129A4AFB200FA1E22 /* RouterTests.swift */; };
 		371C738C29A4AFB200FA1E22 /* RouterUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371C738B29A4AFB200FA1E22 /* RouterUITests.swift */; };
 		371C738E29A4AFB200FA1E22 /* RouterUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371C738D29A4AFB200FA1E22 /* RouterUITestsLaunchTests.swift */; };
+		371C73A329A4B2EB00FA1E22 /* ExerciseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371C73A229A4B2EB00FA1E22 /* ExerciseModel.swift */; };
+		371C73A529A4B46F00FA1E22 /* ExerciseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371C73A429A4B46F00FA1E22 /* ExerciseViewModel.swift */; };
+		371C73A929A4B5FB00FA1E22 /* ExerciseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371C73A829A4B5FB00FA1E22 /* ExerciseView.swift */; };
+		371C73AE29A5978F00FA1E22 /* RoutineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371C73AD29A5978F00FA1E22 /* RoutineView.swift */; };
+		371C73B129A5A8CB00FA1E22 /* Datas.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 371C73AF29A5A8CB00FA1E22 /* Datas.xcdatamodeld */; };
+		371C73B429A5AA4D00FA1E22 /* Persistent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371C73B329A5AA4D00FA1E22 /* Persistent.swift */; };
+		37B429FB29A83A82003728E1 /* SreachBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B429FA29A83A82003728E1 /* SreachBarView.swift */; };
+		37B429FE29A853B1003728E1 /* ExerciseCreate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B429FD29A853B1003728E1 /* ExerciseCreate.swift */; };
+		37B42A0029A85742003728E1 /* Modifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B429FF29A85742003728E1 /* Modifiers.swift */; };
+		37B42A0229A868C5003728E1 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B42A0129A868C5003728E1 /* Extension.swift */; };
+		37B42A0429A86FFF003728E1 /* Images.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B42A0329A86FFF003728E1 /* Images.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +55,17 @@
 		371C738729A4AFB200FA1E22 /* RouterUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RouterUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		371C738B29A4AFB200FA1E22 /* RouterUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouterUITests.swift; sourceTree = "<group>"; };
 		371C738D29A4AFB200FA1E22 /* RouterUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouterUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		371C73A229A4B2EB00FA1E22 /* ExerciseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseModel.swift; sourceTree = "<group>"; };
+		371C73A429A4B46F00FA1E22 /* ExerciseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseViewModel.swift; sourceTree = "<group>"; };
+		371C73A829A4B5FB00FA1E22 /* ExerciseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseView.swift; sourceTree = "<group>"; };
+		371C73AD29A5978F00FA1E22 /* RoutineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutineView.swift; sourceTree = "<group>"; };
+		371C73B029A5A8CB00FA1E22 /* Datas.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Datas.xcdatamodel; sourceTree = "<group>"; };
+		371C73B329A5AA4D00FA1E22 /* Persistent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistent.swift; sourceTree = "<group>"; };
+		37B429FA29A83A82003728E1 /* SreachBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SreachBarView.swift; sourceTree = "<group>"; };
+		37B429FD29A853B1003728E1 /* ExerciseCreate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseCreate.swift; sourceTree = "<group>"; };
+		37B429FF29A85742003728E1 /* Modifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Modifiers.swift; sourceTree = "<group>"; };
+		37B42A0129A868C5003728E1 /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
+		37B42A0329A86FFF003728E1 /* Images.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Images.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,10 +116,12 @@
 		371C736F29A4AFB000FA1E22 /* Router */ = {
 			isa = PBXGroup;
 			children = (
-				371C737029A4AFB000FA1E22 /* RouterApp.swift */,
-				371C737229A4AFB000FA1E22 /* ContentView.swift */,
-				371C737429A4AFB200FA1E22 /* Assets.xcassets */,
+				37B429F929A83A6A003728E1 /* Common */,
+				371C73A029A4B2C100FA1E22 /* Application */,
+				371C73A129A4B2D600FA1E22 /* Exercise */,
+				371C73AC29A5974700FA1E22 /* Routine */,
 				371C737629A4AFB200FA1E22 /* Preview Content */,
+				371C73B229A5AA3300FA1E22 /* Datas */,
 			);
 			path = Router;
 			sourceTree = "<group>";
@@ -125,6 +149,63 @@
 				371C738D29A4AFB200FA1E22 /* RouterUITestsLaunchTests.swift */,
 			);
 			path = RouterUITests;
+			sourceTree = "<group>";
+		};
+		371C73A029A4B2C100FA1E22 /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				371C737429A4AFB200FA1E22 /* Assets.xcassets */,
+				371C737029A4AFB000FA1E22 /* RouterApp.swift */,
+				371C737229A4AFB000FA1E22 /* ContentView.swift */,
+			);
+			path = Application;
+			sourceTree = "<group>";
+		};
+		371C73A129A4B2D600FA1E22 /* Exercise */ = {
+			isa = PBXGroup;
+			children = (
+				37B429FC29A853A2003728E1 /* ExerciseCreate */,
+				371C73A829A4B5FB00FA1E22 /* ExerciseView.swift */,
+				371C73A429A4B46F00FA1E22 /* ExerciseViewModel.swift */,
+				371C73A229A4B2EB00FA1E22 /* ExerciseModel.swift */,
+			);
+			path = Exercise;
+			sourceTree = "<group>";
+		};
+		371C73AC29A5974700FA1E22 /* Routine */ = {
+			isa = PBXGroup;
+			children = (
+				371C73AD29A5978F00FA1E22 /* RoutineView.swift */,
+			);
+			path = Routine;
+			sourceTree = "<group>";
+		};
+		371C73B229A5AA3300FA1E22 /* Datas */ = {
+			isa = PBXGroup;
+			children = (
+				371C73B329A5AA4D00FA1E22 /* Persistent.swift */,
+				371C73AF29A5A8CB00FA1E22 /* Datas.xcdatamodeld */,
+			);
+			path = Datas;
+			sourceTree = "<group>";
+		};
+		37B429F929A83A6A003728E1 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				37B429FA29A83A82003728E1 /* SreachBarView.swift */,
+				37B429FF29A85742003728E1 /* Modifiers.swift */,
+				37B42A0129A868C5003728E1 /* Extension.swift */,
+				37B42A0329A86FFF003728E1 /* Images.swift */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		37B429FC29A853A2003728E1 /* ExerciseCreate */ = {
+			isa = PBXGroup;
+			children = (
+				37B429FD29A853B1003728E1 /* ExerciseCreate.swift */,
+			);
+			path = ExerciseCreate;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -257,8 +338,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				37B429FB29A83A82003728E1 /* SreachBarView.swift in Sources */,
 				371C737329A4AFB000FA1E22 /* ContentView.swift in Sources */,
+				371C73A329A4B2EB00FA1E22 /* ExerciseModel.swift in Sources */,
+				37B42A0229A868C5003728E1 /* Extension.swift in Sources */,
+				37B42A0429A86FFF003728E1 /* Images.swift in Sources */,
+				371C73A529A4B46F00FA1E22 /* ExerciseViewModel.swift in Sources */,
+				37B42A0029A85742003728E1 /* Modifiers.swift in Sources */,
+				371C73AE29A5978F00FA1E22 /* RoutineView.swift in Sources */,
 				371C737129A4AFB000FA1E22 /* RouterApp.swift in Sources */,
+				371C73B429A5AA4D00FA1E22 /* Persistent.swift in Sources */,
+				371C73A929A4B5FB00FA1E22 /* ExerciseView.swift in Sources */,
+				371C73B129A5A8CB00FA1E22 /* Datas.xcdatamodeld in Sources */,
+				37B429FE29A853B1003728E1 /* ExerciseCreate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -583,6 +675,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		371C73AF29A5A8CB00FA1E22 /* Datas.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				371C73B029A5A8CB00FA1E22 /* Datas.xcdatamodel */,
+			);
+			currentVersion = 371C73B029A5A8CB00FA1E22 /* Datas.xcdatamodel */;
+			path = Datas.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 371C736529A4AFB000FA1E22 /* Project object */;
 }
