@@ -8,12 +8,13 @@
 import SwiftUI
 
 struct SearchBarView: View {
+	var placeholder = "운동명"
     @Binding var searchText: String
     var body: some View {
         HStack(spacing: 0) {
             Image(systemName: "magnifyingglass")
                 .padding()
-            TextField("운동명",text: $searchText)
+            TextField(placeholder,text: $searchText)
             Spacer()
             if searchText != "" {
                 Button {

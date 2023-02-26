@@ -8,13 +8,15 @@
 import Foundation
 
 struct ExerciseModel {
-    /// 운동 명
-    let name: String
-    /// SFSymbol 사용
-    let iconShape: String
-    /// Hex 코드로 작성
-    let iconColor: String
-    /// 부위
-    let part: String
+   
 }
-
+struct Exercise: Hashable {
+	/// 운동 명
+	let exerciseName: String?
+	/// SFSymbol 사용
+	let symbolName: String?
+	/// Hex 코드로 작성
+	let symbolColorHex: String?
+	/// 부위
+	let exercisePart: String?
+}

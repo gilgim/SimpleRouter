@@ -4,9 +4,14 @@ struct ContentView: View {
     var body: some View {
         NavigationView {
             TabView {
-                NavigationLink("Exercise") {
-                    ExerciseView()
-                }               
+				VStack {
+					NavigationLink("Exercise") {
+						ExerciseView()
+					}
+//					NavigationLink("Routine") {
+//						RoutineView()
+//					}
+				}
                 .tabItem {
                     Image(systemName: "plus")
                     Text("work out")

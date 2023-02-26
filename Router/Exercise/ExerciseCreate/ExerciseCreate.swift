@@ -9,26 +9,24 @@ import SwiftUI
 import UIKit
 
 struct ExerciseCreate: View {
-    @State var symbol: String = "figure.walk"
-    @State var hex: String = ""
-    @State var exerciseName: String = ""
-    @State var exercisePart: String = ""
+	@Environment(\.presentationMode) var mode
+	@StateObject var vm = ExerciseCreateViewModel()
     var body: some View {
         ScrollView {
             VStack {
                 HStack {
                     ZStack {
                         Circle()
-                            .foregroundColor(Color(hex: hex))
+							.foregroundColor(Color(hex: self.vm.hex))
                             .background() {
-                                if hex == "" {
+								if self.vm.hex == "" {
                                     Circle()
                                         .stroke(lineWidth: 2)
                                         .foregroundColor(.black)
                                 }
                             }
                             .overlay(
-                                Image(systemName:symbol)
+								Image(systemName:self.vm.symbol)
                                     .resizable()
                                     .scaledToFit()
                                     .foregroundColor(.white)
@@ -37,16 +35,16 @@ struct ExerciseCreate: View {
                     }
                     
                     VStack {
-                        TextField("운동명", text: $exerciseName)
+						TextField("운동명", text: $vm.exerciseName)
                             .modifier(RoundedRectangleModifier())
-                        TextField("부위명", text: $exercisePart)
+						TextField("부위명", text: $vm.exercisePart)
                             .modifier(RoundedRectangleModifier())
                     }
                 }
                 .frame(maxHeight: 120)
-                SymbolImageView(symbol: $symbol)
+				SymbolImageView(symbol: $vm.symbol)
                     .padding(.vertical)
-                SymbolColorView(hex: $hex)
+				SymbolColorView(hex: $vm.hex)
                     .padding(.vertical)
             }
             .padding()
@@ -54,7 +52,8 @@ struct ExerciseCreate: View {
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button("생성") {
-                    
+					self.vm.createExercise()
+					self.mode.wrappedValue.dismiss()
                 }
             }
         }
