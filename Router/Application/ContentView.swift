@@ -8,9 +8,9 @@ struct ContentView: View {
 					NavigationLink("Exercise") {
 						ExerciseView()
 					}
-//					NavigationLink("Routine") {
-//						RoutineView()
-//					}
+					NavigationLink("Routine") {
+						RoutineView()
+					}
 				}
                 .tabItem {
                     Image(systemName: "plus")
