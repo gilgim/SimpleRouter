@@ -11,6 +11,7 @@ struct ExerciseModel {
    
 }
 struct Exercise: Hashable {
+    let id = UUID()
 	/// 운동 명
 	let exerciseName: String?
 	/// SFSymbol 사용
@@ -19,4 +20,16 @@ struct Exercise: Hashable {
 	let symbolColorHex: String?
 	/// 부위
 	let exercisePart: String?
+    /// 휴식시간
+    var restTime: Int16?
+    /// 세트 수
+    var set: Int16?
+    init(exerciseName: String?, symbolName: String?, symbolColorHex: String?, exercisePart: String?, restTime: Int16? = nil, set: Int16? = nil) {
+        self.exerciseName = exerciseName
+        self.symbolName = symbolName
+        self.symbolColorHex = symbolColorHex
+        self.exercisePart = exercisePart
+        self.restTime = restTime
+        self.set = set
+    }
 }

@@ -19,16 +19,19 @@
 		371C73A929A4B5FB00FA1E22 /* ExerciseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371C73A829A4B5FB00FA1E22 /* ExerciseView.swift */; };
 		371C73B129A5A8CB00FA1E22 /* Datas.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 371C73AF29A5A8CB00FA1E22 /* Datas.xcdatamodeld */; };
 		371C73B429A5AA4D00FA1E22 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371C73B329A5AA4D00FA1E22 /* CoreDataManager.swift */; };
+		3751807329AC46CE0059183F /* RoutineViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3751807229AC46CE0059183F /* RoutineViewModel.swift */; };
+		3751807529AC48BC0059183F /* RoutineModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3751807429AC48BC0059183F /* RoutineModel.swift */; };
+		3751807829AC59A20059183F /* CoreDataRoutine+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3751807629AC59A20059183F /* CoreDataRoutine+CoreDataClass.swift */; };
+		3751807929AC59A20059183F /* CoreDataRoutine+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3751807729AC59A20059183F /* CoreDataRoutine+CoreDataProperties.swift */; };
 		37B429FB29A83A82003728E1 /* SreachBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B429FA29A83A82003728E1 /* SreachBarView.swift */; };
 		37B429FE29A853B1003728E1 /* ExerciseCreate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B429FD29A853B1003728E1 /* ExerciseCreate.swift */; };
 		37B42A0029A85742003728E1 /* Modifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B429FF29A85742003728E1 /* Modifiers.swift */; };
 		37B42A0229A868C5003728E1 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B42A0129A868C5003728E1 /* Extension.swift */; };
 		37B42A0429A86FFF003728E1 /* Images.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B42A0329A86FFF003728E1 /* Images.swift */; };
+		37B42A0629AC2746003728E1 /* RoutineCreateViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B42A0529AC2746003728E1 /* RoutineCreateViewModel.swift */; };
 		C372882429A9F0EA00EDCBA8 /* ExerciseCreateViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C372882329A9F0E900EDCBA8 /* ExerciseCreateViewModel.swift */; };
 		C372883629A9FD7600EDCBA8 /* CoreDataExercise+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = C372883229A9FD7600EDCBA8 /* CoreDataExercise+CoreDataClass.swift */; };
 		C372883729A9FD7600EDCBA8 /* CoreDataExercise+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = C372883329A9FD7600EDCBA8 /* CoreDataExercise+CoreDataProperties.swift */; };
-		C372883829A9FD7600EDCBA8 /* CoreDataRoutine+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = C372883429A9FD7600EDCBA8 /* CoreDataRoutine+CoreDataClass.swift */; };
-		C372883929A9FD7600EDCBA8 /* CoreDataRoutine+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = C372883529A9FD7600EDCBA8 /* CoreDataRoutine+CoreDataProperties.swift */; };
 		C372884229AB938300EDCBA8 /* RoutineCreateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C372884029AB938300EDCBA8 /* RoutineCreateView.swift */; };
 		C372884329AB938300EDCBA8 /* RoutineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C372884129AB938300EDCBA8 /* RoutineView.swift */; };
 /* End PBXBuildFile section */
@@ -66,16 +69,19 @@
 		371C73A829A4B5FB00FA1E22 /* ExerciseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseView.swift; sourceTree = "<group>"; };
 		371C73B029A5A8CB00FA1E22 /* Datas.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Datas.xcdatamodel; sourceTree = "<group>"; };
 		371C73B329A5AA4D00FA1E22 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
+		3751807229AC46CE0059183F /* RoutineViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutineViewModel.swift; sourceTree = "<group>"; };
+		3751807429AC48BC0059183F /* RoutineModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutineModel.swift; sourceTree = "<group>"; };
+		3751807629AC59A20059183F /* CoreDataRoutine+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "CoreDataRoutine+CoreDataClass.swift"; path = "../../../CoreDataRoutine+CoreDataClass.swift"; sourceTree = "<group>"; };
+		3751807729AC59A20059183F /* CoreDataRoutine+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "CoreDataRoutine+CoreDataProperties.swift"; path = "../../../CoreDataRoutine+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		37B429FA29A83A82003728E1 /* SreachBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SreachBarView.swift; sourceTree = "<group>"; };
 		37B429FD29A853B1003728E1 /* ExerciseCreate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseCreate.swift; sourceTree = "<group>"; };
 		37B429FF29A85742003728E1 /* Modifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Modifiers.swift; sourceTree = "<group>"; };
 		37B42A0129A868C5003728E1 /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
 		37B42A0329A86FFF003728E1 /* Images.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Images.swift; sourceTree = "<group>"; };
+		37B42A0529AC2746003728E1 /* RoutineCreateViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutineCreateViewModel.swift; sourceTree = "<group>"; };
 		C372882329A9F0E900EDCBA8 /* ExerciseCreateViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseCreateViewModel.swift; sourceTree = "<group>"; };
 		C372883229A9FD7600EDCBA8 /* CoreDataExercise+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CoreDataExercise+CoreDataClass.swift"; sourceTree = "<group>"; };
 		C372883329A9FD7600EDCBA8 /* CoreDataExercise+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CoreDataExercise+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		C372883429A9FD7600EDCBA8 /* CoreDataRoutine+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CoreDataRoutine+CoreDataClass.swift"; sourceTree = "<group>"; };
-		C372883529A9FD7600EDCBA8 /* CoreDataRoutine+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CoreDataRoutine+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		C372883A29AA5D4700EDCBA8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		C372884029AB938300EDCBA8 /* RoutineCreateView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoutineCreateView.swift; sourceTree = "<group>"; };
 		C372884129AB938300EDCBA8 /* RoutineView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoutineView.swift; sourceTree = "<group>"; };
@@ -221,8 +227,8 @@
 			children = (
 				C372883229A9FD7600EDCBA8 /* CoreDataExercise+CoreDataClass.swift */,
 				C372883329A9FD7600EDCBA8 /* CoreDataExercise+CoreDataProperties.swift */,
-				C372883429A9FD7600EDCBA8 /* CoreDataRoutine+CoreDataClass.swift */,
-				C372883529A9FD7600EDCBA8 /* CoreDataRoutine+CoreDataProperties.swift */,
+				3751807629AC59A20059183F /* CoreDataRoutine+CoreDataClass.swift */,
+				3751807729AC59A20059183F /* CoreDataRoutine+CoreDataProperties.swift */,
 			);
 			path = CoreDataSubClass;
 			sourceTree = "<group>";
@@ -232,6 +238,8 @@
 			children = (
 				C372883F29AB938300EDCBA8 /* RoutineCreate */,
 				C372884129AB938300EDCBA8 /* RoutineView.swift */,
+				3751807229AC46CE0059183F /* RoutineViewModel.swift */,
+				3751807429AC48BC0059183F /* RoutineModel.swift */,
 			);
 			path = Routine;
 			sourceTree = "<group>";
@@ -240,6 +248,7 @@
 			isa = PBXGroup;
 			children = (
 				C372884029AB938300EDCBA8 /* RoutineCreateView.swift */,
+				37B42A0529AC2746003728E1 /* RoutineCreateViewModel.swift */,
 			);
 			path = RoutineCreate;
 			sourceTree = "<group>";
@@ -375,24 +384,27 @@
 			buildActionMask = 2147483647;
 			files = (
 				37B429FB29A83A82003728E1 /* SreachBarView.swift in Sources */,
+				37B42A0629AC2746003728E1 /* RoutineCreateViewModel.swift in Sources */,
 				C372883629A9FD7600EDCBA8 /* CoreDataExercise+CoreDataClass.swift in Sources */,
 				371C737329A4AFB000FA1E22 /* ContentView.swift in Sources */,
 				C372882429A9F0EA00EDCBA8 /* ExerciseCreateViewModel.swift in Sources */,
 				371C73A329A4B2EB00FA1E22 /* ExerciseModel.swift in Sources */,
+				3751807529AC48BC0059183F /* RoutineModel.swift in Sources */,
 				C372884229AB938300EDCBA8 /* RoutineCreateView.swift in Sources */,
 				C372884329AB938300EDCBA8 /* RoutineView.swift in Sources */,
 				37B42A0229A868C5003728E1 /* Extension.swift in Sources */,
 				37B42A0429A86FFF003728E1 /* Images.swift in Sources */,
+				3751807929AC59A20059183F /* CoreDataRoutine+CoreDataProperties.swift in Sources */,
+				3751807329AC46CE0059183F /* RoutineViewModel.swift in Sources */,
 				371C73A529A4B46F00FA1E22 /* ExerciseViewModel.swift in Sources */,
 				37B42A0029A85742003728E1 /* Modifiers.swift in Sources */,
 				C372883729A9FD7600EDCBA8 /* CoreDataExercise+CoreDataProperties.swift in Sources */,
 				371C737129A4AFB000FA1E22 /* RouterApp.swift in Sources */,
 				371C73B429A5AA4D00FA1E22 /* CoreDataManager.swift in Sources */,
-				C372883929A9FD7600EDCBA8 /* CoreDataRoutine+CoreDataProperties.swift in Sources */,
 				371C73A929A4B5FB00FA1E22 /* ExerciseView.swift in Sources */,
-				C372883829A9FD7600EDCBA8 /* CoreDataRoutine+CoreDataClass.swift in Sources */,
 				371C73B129A5A8CB00FA1E22 /* Datas.xcdatamodeld in Sources */,
 				37B429FE29A853B1003728E1 /* ExerciseCreate.swift in Sources */,
+				3751807829AC59A20059183F /* CoreDataRoutine+CoreDataClass.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

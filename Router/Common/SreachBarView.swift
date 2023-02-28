@@ -24,7 +24,6 @@ struct SearchBarView: View {
                         .foregroundColor(.gray)
                         .padding()
                 }
-                
             }
         }
         .background() {

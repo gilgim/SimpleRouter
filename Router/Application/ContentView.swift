@@ -1,20 +1,26 @@
 import SwiftUI
-
+enum ViewType {
+    case Exercise, Routine
+}
 struct ContentView: View {
     var body: some View {
-        NavigationView {
+        NavigationStack {
             TabView {
 				VStack {
-					NavigationLink("Exercise") {
-						ExerciseView()
-					}
-					NavigationLink("Routine") {
-						RoutineView()
-					}
+                    NavigationLink("Exercise", value: ViewType.Exercise)
+                    NavigationLink("Routine", value: ViewType.Routine)
 				}
                 .tabItem {
                     Image(systemName: "plus")
                     Text("work out")
+                }
+            }
+            .navigationDestination(for: ViewType.self) {
+                switch $0 {
+                case .Exercise:
+                    ExerciseView()
+                case .Routine:
+                    RoutineView()
                 }
             }
         }

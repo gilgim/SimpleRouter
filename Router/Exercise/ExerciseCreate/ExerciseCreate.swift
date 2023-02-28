@@ -42,9 +42,9 @@ struct ExerciseCreate: View {
                     }
                 }
                 .frame(maxHeight: 120)
-				SymbolImageView(symbol: $vm.symbol)
+                SymbolColorView(hex: $vm.hex)
                     .padding(.vertical)
-				SymbolColorView(hex: $vm.hex)
+				SymbolImageView(symbol: $vm.symbol)
                     .padding(.vertical)
             }
             .padding()
