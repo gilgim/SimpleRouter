@@ -14,4 +14,19 @@ class ExerciseCreateViewModel: ObservableObject {
 	@Published var exerciseName: String = ""
 	@Published var exercisePart: String = ""
 	
+    func createExercise() {
+        let realmExercise = RealmExercise()
+        realmExercise.exerciseName = self.exerciseName
+        realmExercise.exercisePart = self.exercisePart
+        realmExercise.symbolName = self.symbol
+        realmExercise.symbolColorHex = self.hex
+        do {
+            try realm().write({
+                realm().add(realmExercise)
+            })
+        }
+        catch {
+            fatalError("\(error)")
+        }
+    }
 }

@@ -52,6 +52,7 @@ struct ExerciseCreate: View {
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button("생성") {
+                    self.vm.createExercise()
 					self.mode.wrappedValue.dismiss()
                 }
             }

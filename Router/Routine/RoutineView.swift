@@ -38,7 +38,6 @@ struct RoutineView: View {
 			}
 		}
         .onAppear() {
-            self.vm.readRoutines()
         }
         .navigationDestination(isPresented: $isCreate) {
             RoutineCreateView()

@@ -1,4 +1,5 @@
 import SwiftUI
+import RealmSwift
 enum ViewType {
     case Exercise, Routine
 }
@@ -23,6 +24,9 @@ struct ContentView: View {
                     RoutineView()
                 }
             }
+        }
+        .onAppear() {
+            print("Realm URL : \(Realm.Configuration.defaultConfiguration.fileURL?.absoluteString ?? "nothing")")
         }
     }
 }
