@@ -13,6 +13,7 @@ struct RoutineView: View {
 	@State var searchText: String = ""
     @State var isCreate: Bool = false
     @State var isWorkOut: Bool = false
+    @State var userSelectRoutine: String = ""
 	var body: some View {
 		VStack {
 			SearchBarView(placeholder:"루틴명", searchText: $searchText)
@@ -20,7 +21,10 @@ struct RoutineView: View {
 			List {
                 ForEach(vm.routines, id: \.id) { routine in
                     Button(routine.routineName ?? "Not") {
-                        self.isWorkOut = true
+                        if let routineName = routine.routineName {
+                            self.userSelectRoutine = routineName
+                            self.isWorkOut = true
+                        }
                     }
                 }
 			}
@@ -42,6 +46,7 @@ struct RoutineView: View {
             RoutineCreateView()
         }
         .navigationDestination(isPresented: $isWorkOut) {
+            WorkOutView(routineName: $userSelectRoutine)
         }
 	}
 }

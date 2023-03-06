@@ -28,6 +28,9 @@
 		37B42A0229A868C5003728E1 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B42A0129A868C5003728E1 /* Extension.swift */; };
 		37B42A0429A86FFF003728E1 /* Images.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B42A0329A86FFF003728E1 /* Images.swift */; };
 		37B42A0629AC2746003728E1 /* RoutineCreateViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B42A0529AC2746003728E1 /* RoutineCreateViewModel.swift */; };
+		37B6421E29B5D0AF005AC9FB /* WorkOutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B6421D29B5D0AF005AC9FB /* WorkOutView.swift */; };
+		37B6422029B5D157005AC9FB /* WorkOutViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B6421F29B5D157005AC9FB /* WorkOutViewModel.swift */; };
+		37B6422229B5D675005AC9FB /* WorkOutModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B6422129B5D675005AC9FB /* WorkOutModel.swift */; };
 		A614430609B7D5A81ED13DBB /* Pods_Router.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 17BFD58CB2FF9F357CC583A8 /* Pods_Router.framework */; };
 		B18E63F8CE1E9B0D19CD0C45 /* Pods_RouterTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83F732DD495AA3E6397D7AF9 /* Pods_RouterTests.framework */; };
 		C372882429A9F0EA00EDCBA8 /* ExerciseCreateViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C372882329A9F0E900EDCBA8 /* ExerciseCreateViewModel.swift */; };
@@ -78,6 +81,9 @@
 		37B42A0129A868C5003728E1 /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
 		37B42A0329A86FFF003728E1 /* Images.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Images.swift; sourceTree = "<group>"; };
 		37B42A0529AC2746003728E1 /* RoutineCreateViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutineCreateViewModel.swift; sourceTree = "<group>"; };
+		37B6421D29B5D0AF005AC9FB /* WorkOutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkOutView.swift; sourceTree = "<group>"; };
+		37B6421F29B5D157005AC9FB /* WorkOutViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkOutViewModel.swift; sourceTree = "<group>"; };
+		37B6422129B5D675005AC9FB /* WorkOutModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkOutModel.swift; sourceTree = "<group>"; };
 		3C787860C46D5E4F7C2D482A /* Pods_Router_RouterUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Router_RouterUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5F478B6FCA43C8FAD8D68992 /* Pods-Router-RouterUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Router-RouterUITests.release.xcconfig"; path = "Target Support Files/Pods-Router-RouterUITests/Pods-Router-RouterUITests.release.xcconfig"; sourceTree = "<group>"; };
 		775E72F0F0545CEB1D76ABD6 /* Pods-Router.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Router.debug.xcconfig"; path = "Target Support Files/Pods-Router/Pods-Router.debug.xcconfig"; sourceTree = "<group>"; };
@@ -252,6 +258,9 @@
 		37B6421C29B5CE29005AC9FB /* WorkOut */ = {
 			isa = PBXGroup;
 			children = (
+				37B6421D29B5D0AF005AC9FB /* WorkOutView.swift */,
+				37B6421F29B5D157005AC9FB /* WorkOutViewModel.swift */,
+				37B6422129B5D675005AC9FB /* WorkOutModel.swift */,
 			);
 			path = WorkOut;
 			sourceTree = "<group>";
@@ -536,6 +545,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				37B429FB29A83A82003728E1 /* SreachBarView.swift in Sources */,
+				37B6422229B5D675005AC9FB /* WorkOutModel.swift in Sources */,
 				37B42A0629AC2746003728E1 /* RoutineCreateViewModel.swift in Sources */,
 				371C737329A4AFB000FA1E22 /* ContentView.swift in Sources */,
 				C372882429A9F0EA00EDCBA8 /* ExerciseCreateViewModel.swift in Sources */,
@@ -548,8 +558,10 @@
 				37B42A0429A86FFF003728E1 /* Images.swift in Sources */,
 				3751807329AC46CE0059183F /* RoutineViewModel.swift in Sources */,
 				371C73A529A4B46F00FA1E22 /* ExerciseViewModel.swift in Sources */,
+				37B6421E29B5D0AF005AC9FB /* WorkOutView.swift in Sources */,
 				37B42A0029A85742003728E1 /* Modifiers.swift in Sources */,
 				371C737129A4AFB000FA1E22 /* RouterApp.swift in Sources */,
+				37B6422029B5D157005AC9FB /* WorkOutViewModel.swift in Sources */,
 				371C73A929A4B5FB00FA1E22 /* ExerciseView.swift in Sources */,
 				3745072E29B5AD45004A33CD /* Error.swift in Sources */,
 				37B429FE29A853B1003728E1 /* ExerciseCreate.swift in Sources */,
