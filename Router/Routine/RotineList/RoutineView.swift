@@ -12,17 +12,15 @@ struct RoutineView: View {
     @StateObject var vm = RoutineViewModel()
 	@State var searchText: String = ""
     @State var isCreate: Bool = false
+    @State var isWorkOut: Bool = false
 	var body: some View {
 		VStack {
 			SearchBarView(placeholder:"루틴명", searchText: $searchText)
 				.padding()
 			List {
                 ForEach(vm.routines, id: \.id) { routine in
-                    HStack {
-                        Text(routine.routineName ?? "Not")
-                        ForEach(routine.exercises ?? [], id: \.self) { temp in
-                            Text(temp.exerciseName ?? "Not")
-                        }
+                    Button(routine.routineName ?? "Not") {
+                        self.isWorkOut = true
                     }
                 }
 			}
@@ -38,9 +36,12 @@ struct RoutineView: View {
 			}
 		}
         .onAppear() {
+            self.vm.readRoutine()
         }
         .navigationDestination(isPresented: $isCreate) {
             RoutineCreateView()
+        }
+        .navigationDestination(isPresented: $isWorkOut) {
         }
 	}
 }

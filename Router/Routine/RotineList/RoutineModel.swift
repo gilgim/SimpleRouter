@@ -12,5 +12,5 @@ struct Routine: Hashable {
     /// 루틴 명
     let routineName: String?
     /// 루틴 포함 운동들
-    let exercises: [Exercise]?
+    let exercises: [[String]]?
 }

@@ -115,6 +115,8 @@ struct RoutineCreateView: View {
 		.toolbar(content: {
 			ToolbarItem(placement:.navigationBarTrailing) {
 				Button("생성") {
+                    self.vm.createRoutine()
+                    self.mode.wrappedValue.dismiss()
 				}
 			}
 		})

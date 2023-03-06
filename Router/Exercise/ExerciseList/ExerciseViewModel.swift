@@ -15,6 +15,7 @@ class ExerciseViewModel: ObservableObject {
         self.model = model
     }
     func readExercise() {
+        self.exercises = []
         let realmExercise = realm().objects(RealmExercise.self)
         let exercises = realmExercise.map({
             let exercise = Exercise(exerciseName: $0.exerciseName, symbolName: $0.symbolName, symbolColorHex: $0.symbolColorHex, exercisePart: $0.exercisePart)

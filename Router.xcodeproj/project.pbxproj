@@ -147,6 +147,7 @@
 				C372883A29AA5D4700EDCBA8 /* Info.plist */,
 				371C73A029A4B2C100FA1E22 /* Application */,
 				37B429F929A83A6A003728E1 /* Common */,
+				37B6421C29B5CE29005AC9FB /* WorkOut */,
 				C372883E29AB938300EDCBA8 /* Routine */,
 				371C73A129A4B2D600FA1E22 /* Exercise */,
 				3745072A29B5A494004A33CD /* Data */,
@@ -193,10 +194,8 @@
 		371C73A129A4B2D600FA1E22 /* Exercise */ = {
 			isa = PBXGroup;
 			children = (
+				3745072F29B5B886004A33CD /* ExerciseList */,
 				37B429FC29A853A2003728E1 /* ExerciseCreate */,
-				371C73A829A4B5FB00FA1E22 /* ExerciseView.swift */,
-				371C73A429A4B46F00FA1E22 /* ExerciseViewModel.swift */,
-				371C73A229A4B2EB00FA1E22 /* ExerciseModel.swift */,
 			);
 			path = Exercise;
 			sourceTree = "<group>";
@@ -207,6 +206,26 @@
 				3745072B29B5A4A6004A33CD /* DataType.swift */,
 			);
 			path = Data;
+			sourceTree = "<group>";
+		};
+		3745072F29B5B886004A33CD /* ExerciseList */ = {
+			isa = PBXGroup;
+			children = (
+				371C73A829A4B5FB00FA1E22 /* ExerciseView.swift */,
+				371C73A429A4B46F00FA1E22 /* ExerciseViewModel.swift */,
+				371C73A229A4B2EB00FA1E22 /* ExerciseModel.swift */,
+			);
+			path = ExerciseList;
+			sourceTree = "<group>";
+		};
+		3745073029B5B8A3004A33CD /* RotineList */ = {
+			isa = PBXGroup;
+			children = (
+				C372884129AB938300EDCBA8 /* RoutineView.swift */,
+				3751807229AC46CE0059183F /* RoutineViewModel.swift */,
+				3751807429AC48BC0059183F /* RoutineModel.swift */,
+			);
+			path = RotineList;
 			sourceTree = "<group>";
 		};
 		37B429F929A83A6A003728E1 /* Common */ = {
@@ -230,6 +249,13 @@
 			path = ExerciseCreate;
 			sourceTree = "<group>";
 		};
+		37B6421C29B5CE29005AC9FB /* WorkOut */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = WorkOut;
+			sourceTree = "<group>";
+		};
 		A4CECC1009B1493DFB135753 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -246,10 +272,8 @@
 		C372883E29AB938300EDCBA8 /* Routine */ = {
 			isa = PBXGroup;
 			children = (
+				3745073029B5B8A3004A33CD /* RotineList */,
 				C372883F29AB938300EDCBA8 /* RoutineCreate */,
-				C372884129AB938300EDCBA8 /* RoutineView.swift */,
-				3751807229AC46CE0059183F /* RoutineViewModel.swift */,
-				3751807429AC48BC0059183F /* RoutineModel.swift */,
 			);
 			path = Routine;
 			sourceTree = "<group>";

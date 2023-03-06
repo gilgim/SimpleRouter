@@ -14,14 +14,12 @@ class RealmExercise: Object, Identifiable {
     @Persisted var exercisePart: String? = nil
     @Persisted var symbolName: String? = nil
     @Persisted var symbolColorHex: String? = nil
-    @Persisted var set: Int16 = 5
-    @Persisted var restTime: Int16 = 60
 }
 
 class RealmRoutine: Object, Identifiable {
     let id = UUID()
     @Persisted(primaryKey: true) var routineName: String?
-    let exercises = List<RealmExercise>()
+    @Persisted var exercisesName = List<String>()
 }
 func realm() -> Realm {
     do {
