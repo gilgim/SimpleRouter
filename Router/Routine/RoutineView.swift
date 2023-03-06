@@ -9,6 +9,7 @@ import SwiftUI
 
 struct RoutineView: View {
 	@Environment(\.managedObjectContext) private var viewContext
+    @StateObject var vm = RoutineViewModel()
 	@State var searchText: String = ""
     @State var isCreate: Bool = false
 	var body: some View {
@@ -16,7 +17,14 @@ struct RoutineView: View {
 			SearchBarView(placeholder:"루틴명", searchText: $searchText)
 				.padding()
 			List {
-                
+                ForEach(vm.routines, id: \.id) { routine in
+                    HStack {
+                        Text(routine.routineName ?? "Not")
+                        ForEach(routine.exercises ?? [], id: \.self) { temp in
+                            Text(temp.exerciseName ?? "Not")
+                        }
+                    }
+                }
 			}
 			.listStyle(InsetListStyle())
 		}
@@ -29,6 +37,9 @@ struct RoutineView: View {
 				}
 			}
 		}
+        .onAppear() {
+            self.vm.readRoutines()
+        }
         .navigationDestination(isPresented: $isCreate) {
             RoutineCreateView()
         }

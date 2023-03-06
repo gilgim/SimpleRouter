@@ -77,7 +77,7 @@ struct RoutineCreateView: View {
 						Text(completeAlertText)
 					})
 					.alert("휴식시간 변경",isPresented: $isModifyRestTime) {
-						TextField("휴식시간은 초로 설정해주세요.", text: $restTiemText)
+						TextField("휴식시간은 초로 설정해주세요.(숫자만)", text: $restTiemText)
 							.keyboardType(.numberPad)
 						Button("확인") {
 							if restTiemText == restTiemText.filter({$0.isNumber}) {
@@ -115,7 +115,6 @@ struct RoutineCreateView: View {
 		.toolbar(content: {
 			ToolbarItem(placement:.navigationBarTrailing) {
 				Button("생성") {
-					self.vm.createRoutine()
 				}
 			}
 		})
