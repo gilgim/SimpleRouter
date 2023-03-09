@@ -13,10 +13,21 @@ struct WorkOut: Hashable {
 	let routineName: String
 	let workOuts: [WorkOutComponent]
 	let date: String
-}
-//  사용자가 실행하는 운동
-struct WorkOutComponent: Hashable {
-    let id = UUID()
-	let exerciseName: String = ""
-	let setDetail: [Int: [Int]]
+    
+    //  사용자가 실행하는 운동
+    struct WorkOutComponent: Hashable {
+        let id = UUID()
+        //  운동이름
+        let exerciseName: String
+        var symbolInfo: [String]
+        //  세트 [무게, 횟수, 시간]
+        var setDetail: [Int: [Int]]
+        var restTime: Int
+        init(exerciseName: String, symbolInfo: [String] = ["figure.walk","000000"], setDetail: [Int : [Int]], restTime: Int) {
+            self.exerciseName = exerciseName
+            self.symbolInfo = symbolInfo
+            self.setDetail = setDetail
+            self.restTime = restTime
+        }
+    }
 }

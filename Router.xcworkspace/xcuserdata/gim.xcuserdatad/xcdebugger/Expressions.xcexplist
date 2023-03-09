@@ -3,6 +3,14 @@
    version = "1.0">
    <ContextStates>
       <ContextState
+         contextName = "closure #1 in closure #1 in closure #1 in Carousel.body.getter:WorkOutView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "loopCount">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "ExerciseViewModel.readExercise():ExerciseViewModel.swift">
          <PersistentStrings>
             <PersistentString

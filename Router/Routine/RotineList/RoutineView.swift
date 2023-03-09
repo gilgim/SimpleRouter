@@ -47,6 +47,7 @@ struct RoutineView: View {
         }
         .navigationDestination(isPresented: $isWorkOut) {
             WorkOutView(routineName: $userSelectRoutine)
+                .navigationTitle("\(userSelectRoutine)")
         }
 	}
 }
