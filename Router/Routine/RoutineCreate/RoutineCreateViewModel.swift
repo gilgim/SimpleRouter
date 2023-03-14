@@ -19,10 +19,10 @@ class RoutineCreateViewModel: ObservableObject {
         realmRoutine.routineName = self.routineName
         let listExerciseName = List<String>()
         listExerciseName.append(objectsIn: self.selectExercises.map({
-            let exerciseString = "\($0.exerciseName!)&\($0.set!)&\($0.restTime!)"
+            let exerciseString = "\($0.exerciseName)&\($0.set ?? 5)&\($0.restTime ?? 60)"
             return exerciseString
         }))
-        realmRoutine.exercisesName = listExerciseName
+        realmRoutine.exercisesInfos = listExerciseName
         do {
             try realm().write({
                 realm().add(realmRoutine)

@@ -10,16 +10,16 @@ import RealmSwift
 
 class RealmExercise: Object, Identifiable {
     let id = UUID()
-    @Persisted(primaryKey: true) var exerciseName: String? = nil
-    @Persisted var exercisePart: String? = nil
-    @Persisted var symbolName: String? = nil
-    @Persisted var symbolColorHex: String? = nil
+    @Persisted(primaryKey: true) var exerciseName: String
+    @Persisted var exercisePart: String
+    @Persisted var symbolName: String 
+    @Persisted var symbolColorHex: String
 }
 
 class RealmRoutine: Object, Identifiable {
     let id = UUID()
-    @Persisted(primaryKey: true) var routineName: String?
-    @Persisted var exercisesName = List<String>()
+    @Persisted(primaryKey: true) var routineName: String
+    @Persisted var exercisesInfos = List<String>()
 }
 func realm() -> Realm {
     do {

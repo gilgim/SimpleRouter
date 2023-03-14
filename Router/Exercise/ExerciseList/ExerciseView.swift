@@ -32,17 +32,17 @@ struct ExerciseView: View {
                         } label:{
                             HStack {
                                 Circle()
-                                    .foregroundColor(Color(hex:exercise.symbolColorHex ?? "FFFFFF"))
+                                    .foregroundColor(Color(hex:exercise.symbolColorHex ))
                                     .overlay(
-                                        Image(systemName:exercise.symbolName ?? "plus")
+                                        Image(systemName:exercise.symbolName )
                                             .resizable()
                                             .scaledToFit()
                                             .padding()
                                             .foregroundColor(.white)
                                     )
                                 VStack {
-                                    Text(exercise.exerciseName ?? "Nothing")
-                                    Text(exercise.exercisePart ?? "Nothing")
+                                    Text(exercise.exerciseName )
+                                    Text(exercise.exercisePart )
                                 }
                             }
                             .frame(height:100)

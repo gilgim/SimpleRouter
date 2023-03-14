@@ -2,33 +2,29 @@
 //  WorkOutView.swift
 //  Router
 //
-//  Created by Gaea on 2023/03/06.
+//  Created by Gaea on 2023/03/14.
 //
 
 import SwiftUI
 
 struct WorkOutView: View {
-    @StateObject var vm = WorkOutViewModel()
     @Binding var routineName: String
-    @State var selectWokrOut: WorkOut.WorkOutComponent?
+    @StateObject var vm: WorkOutViewModel = .init()
     var body: some View {
-        Group {
-            if selectWokrOut == nil {
-                WorkOutListView(list: $vm.workOut, selectWorkOut: $selectWokrOut)
-            }
-            else {
-                WorkOutSelectView(selectWorkOut: $selectWokrOut)
+        ZStack {
+            RunningListView(runningList: $vm.runningList, completeRunningList: $vm.completeRunningList, selectRunning: $vm.selectRunning)
+                .zIndex(vm.selectRunning == nil ? 1 : 0)
+                .opacity(vm.selectRunning == nil ? 1 : 0)
+            if vm.selectRunning != nil {
+                SelectRunningView(runningList: $vm.runningList, completeRunningList: $vm.completeRunningList, selectRunning: $vm.selectRunning)
+                    .zIndex(vm.selectRunning == nil ? 0 : 1)
             }
         }
-		.toolbar {
-			ToolbarItem(placement: .navigationBarTrailing) {
-				Button("완료") {}
-			}
-		}
         .onAppear() {
-            self.vm.routineName = self.routineName
-            self.vm.loadWorkOutView()
+            vm.routineName = routineName
+            vm.readRoutine()
         }
+        .navigationBarBackButtonHidden(vm.selectRunning == nil ? false : true)
     }
 }
 
@@ -38,58 +34,105 @@ struct WorkOutView_Previews: PreviewProvider {
     }
 }
 
-struct WorkOutListView: View {
-    @Binding var list: WorkOut
-    @Binding var selectWorkOut: WorkOut.WorkOutComponent?
+struct RunningListView: View {
+    @Binding var runningList: [Running]
+    @Binding var completeRunningList: [Running]
+    @Binding var selectRunning: Running?
+    
     var body: some View {
-        ScrollView(.horizontal) {
+        ScrollView(.horizontal, showsIndicators: false) {
             HStack {
-                ForEach(list.workOuts, id:\.id) { workOut in
+                ForEach(runningList, id: \.id) { running in
                     Button {
-                        selectWorkOut = workOut
+                        selectRunning = running
                     }label: {
-                        VStack {
-                            Circle()
-                                .foregroundColor(Color(hex:workOut.symbolInfo[1]))
-                                .overlay(
-                                    Image(systemName:workOut.symbolInfo[0])
-                                        .resizable()
-                                        .scaledToFit()
-                                        .padding()
-                                        .foregroundColor(.white)
-                                )
-                            Text(workOut.exerciseName)
-                        }
+                        Circle()
+                            .overlay {
+                                Text(running.name)
+                            }
                     }
                 }
             }
-            .frame(height: 100)
         }
     }
 }
 
-struct WorkOutSelectView: View {
-    @Binding var selectWorkOut: WorkOut.WorkOutComponent?
+struct SelectRunningView: View {
+    @Binding var runningList: [Running]
+    @Binding var completeRunningList: [Running]
+    @Binding var selectRunning: Running?
+    
+    @StateObject var vm = SelectRunningViewModel()
+    
+    @State var isRestRemainAlert = false
     var body: some View {
         VStack {
-            if let selectWorkOut {
-                Circle()
-                    .foregroundColor(Color(hex:selectWorkOut.symbolInfo[1]))
-                    .overlay(
-                        Image(systemName:selectWorkOut.symbolInfo[0])
-                            .resizable()
-                            .scaledToFit()
-                            .padding()
-                            .foregroundColor(.white)
-                    )
-            }
-            Button {
-                self.selectWorkOut = nil
-            }label: {
-                RoundedRectangle(cornerRadius: 13)
-                    .overlay {
-                        Text("끝").foregroundColor(.white)
+            if let selectRunning {
+                Text("\(vm.currentSet)/\(selectRunning.set)")
+                Text("\(vm.runningTime)")
+                HStack {
+                    TextField("무게",text: $vm.weightString)
+                    if vm.weight != 0 {
+                        Text("kg")
                     }
+                }
+                HStack {
+                    TextField("개수",text: $vm.countString)
+                    if vm.count != 0 {
+                        Text("회")
+                    }
+                }
+                Button {
+                    if vm.isRestRemaining() {
+                        self.isRestRemainAlert = true
+                    }
+                    else {
+                        self.vm.chageRunningState()
+                    }
+                }label: {
+                    RoundedRectangle(cornerRadius: 12)
+                        .overlay {
+                            Text(vm.runningState.rawValue)
+                                .foregroundColor(.white)
+                        }
+                }
+                .alert(isPresented: $isRestRemainAlert) {
+                    Alert(title: Text("휴식알림"), message: Text("아직 휴식 시간이 남았습니다.\n그만 쉬시겠습니까?"), primaryButton: .destructive(Text("확인"),action: {
+                        self.vm.chageRunningState()
+                    }), secondaryButton: .cancel(Text("취소"), action: {
+                        
+                    }))
+                }
+                Text("\(vm.restTime)")
+            }
+        }
+        .onAppear() {
+            self.vm.runningList = self.runningList
+            self.vm.runningListClosure = { value in
+                self.runningList = value
+            }
+            
+            self.vm.completeRunningList = self.completeRunningList
+            self.vm.completeRunningListClosure = { value in
+                self.completeRunningList = value
+            }
+            
+            self.vm.selectRunning = self.selectRunning
+            self.vm.selectRunningClosure = { value in
+                self.selectRunning = value
+            }
+        }
+        .toolbar {
+            ToolbarItem(placement: .navigationBarLeading) {
+                Button("취소") {
+                    self.vm.selectRunning = nil
+                }
+                .foregroundColor(.red)
+            }
+            ToolbarItem(placement: .navigationBarTrailing) {
+                Button("완료") {
+                    self.vm.selectRunning = nil
+                }
             }
         }
     }

@@ -20,11 +20,9 @@ struct RoutineView: View {
 				.padding()
 			List {
                 ForEach(vm.routines, id: \.id) { routine in
-                    Button(routine.routineName ?? "Not") {
-                        if let routineName = routine.routineName {
-                            self.userSelectRoutine = routineName
+                    Button(routine.routineName) {
+                            self.userSelectRoutine = routine.routineName
                             self.isWorkOut = true
-                        }
                     }
                 }
 			}

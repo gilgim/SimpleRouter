@@ -34,17 +34,17 @@ struct RoutineCreateView: View {
                     }label: {
                         HStack {
                             Circle()
-                                .foregroundColor(Color(hex:vm.selectExercises[i].symbolColorHex ?? "FFFFFF"))
+                                .foregroundColor(Color(hex:vm.selectExercises[i].symbolColorHex ))
                                 .overlay(
-                                    Image(systemName:vm.selectExercises[i].symbolName ?? "plus")
+                                    Image(systemName:vm.selectExercises[i].symbolName )
                                         .resizable()
                                         .scaledToFit()
                                         .padding()
                                         .foregroundColor(.white)
                                 )
                             VStack {
-                                Text(vm.selectExercises[i].exerciseName ?? "Nothing")
-                                Text(vm.selectExercises[i].exercisePart ?? "Nothing")
+                                Text(vm.selectExercises[i].exerciseName )
+                                Text(vm.selectExercises[i].exercisePart )
                             }
                         }
                         .frame(height:50)

@@ -10,7 +10,7 @@ import Foundation
 struct Routine: Hashable {
     let id = UUID()
     /// 루틴 명
-    let routineName: String?
+    let routineName: String
     /// 루틴 포함 운동들
     let exercises: [[String]]?
 }

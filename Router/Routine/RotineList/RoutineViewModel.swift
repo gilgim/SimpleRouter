@@ -17,7 +17,7 @@ class RoutineViewModel: ObservableObject {
         let realmRoutines = realm().objects(RealmRoutine.self)
         for realmRoutine in realmRoutines {
             var exercises: [[String]] = []
-            for exercise in realmRoutine.exercisesName {
+            for exercise in realmRoutine.exercisesInfos {
                 exercises.append(exercise.components(separatedBy: "&"))
             }
             let routine = Routine(routineName: realmRoutine.routineName, exercises: exercises)
