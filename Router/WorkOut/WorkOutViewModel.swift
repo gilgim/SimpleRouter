@@ -147,10 +147,7 @@ class SelectRunningViewModel: ObservableObject {
         //  마지막 세트 일 때
         else {
             self.restTimer?.invalidate()
-            let setInfo = "\(currentSet)&\(weight)&\(count)&\(runningTime)&\(restTime)"
-            self.setInfos.append(setInfo)
-            
-            self.selectRunning = nil
+            self.finishRunning()
         }
     }
     func earlyFinishRest() {
@@ -170,6 +167,23 @@ class SelectRunningViewModel: ObservableObject {
         else {
             return true
         }
+    }
+    func isSetRemaining() -> Bool {
+        guard let selectRunning else {return false}
+        if selectRunning.set == self.currentSet {
+            return false
+        }
+        else {
+            return true
+        }
+    }
+    func finishRunning() {
+        guard let selectRunning else {return}
+        let setInfo = "\(self.currentSet)&\(self.weight)&\(self.count)&\(self.runningTime)&\(restTime)"
+        self.setInfos.append(setInfo)
+        self.runningList = self.runningList.filter({$0.id != selectRunning.id})
+        self.completeRunningList.append(selectRunning)
+        self.selectRunning = nil
     }
 }
 

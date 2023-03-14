@@ -42,6 +42,17 @@ struct RunningListView: View {
     var body: some View {
         ScrollView(.horizontal, showsIndicators: false) {
             HStack {
+                ForEach(completeRunningList, id: \.id) { running in
+                    Button {
+                        selectRunning = running
+                    }label: {
+                        Circle()
+                            .overlay {
+                                Text(running.name)
+                            }
+                            .foregroundColor(.gray)
+                    }
+                }
                 ForEach(runningList, id: \.id) { running in
                     Button {
                         selectRunning = running
@@ -65,6 +76,7 @@ struct SelectRunningView: View {
     @StateObject var vm = SelectRunningViewModel()
     
     @State var isRestRemainAlert = false
+    @State var isSetRemainAlert = false
     var body: some View {
         VStack {
             if let selectRunning {
@@ -131,9 +143,18 @@ struct SelectRunningView: View {
             }
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button("완료") {
-                    self.vm.selectRunning = nil
+                    if self.vm.isSetRemaining() {
+                        self.isSetRemainAlert = true
+                    }
                 }
             }
+        }
+        .alert(isPresented: $isSetRemainAlert) {
+            Alert(title: Text("완료 알림"), message: Text("아직 세트가 남았습니다.\n그만하시겠습니까?"), primaryButton: .destructive(Text("확인"),action: {
+                self.vm.finishRunning()
+            }), secondaryButton: .cancel(Text("취소"), action: {
+                
+            }))
         }
     }
 }
