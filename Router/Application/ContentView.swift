@@ -1,9 +1,10 @@
 import SwiftUI
 import RealmSwift
-enum ViewType {
-    case Exercise, Routine
-}
+
 struct ContentView: View {
+    enum ViewType {
+        case Exercise, Routine
+    }
     var body: some View {
         NavigationStack {
             TabView {

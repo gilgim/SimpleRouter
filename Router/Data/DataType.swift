@@ -10,6 +10,7 @@ import RealmSwift
 
 class RealmExercise: Object, Identifiable {
     let id = UUID()
+    //  중복 이름 방지를 위해 운동이름은 고유값으로 설정해준다.
     @Persisted(primaryKey: true) var exerciseName: String
     @Persisted var exercisePart: String
     @Persisted var symbolName: String 
