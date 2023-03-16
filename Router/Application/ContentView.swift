@@ -17,6 +17,7 @@ struct ContentView: View {
                     Text("work out")
                 }
             }
+            .navigationTitle("홈")
             .navigationDestination(for: ViewType.self) {
                 switch $0 {
                 case .Exercise:

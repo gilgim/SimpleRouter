@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Combine
 
 struct ExerciseView: View {
 	@Environment(\.presentationMode) var mode
@@ -13,6 +14,8 @@ struct ExerciseView: View {
     @StateObject var vm = ExerciseViewModel()
     
     @State var searchText: String = ""
+    @State var isKeyboardOpen: Bool = false
+    @State var exercises: [Exercise] = []
     
 	@Binding var selectExercise: Exercise?
     @Binding var isSheetPop: Bool
@@ -25,92 +28,109 @@ struct ExerciseView: View {
         _isSheetPop = isSheetPop
 		_selectExercise = selectExercise
 	}
+    private var cancelables = Set<AnyCancellable>()
     
     var body: some View {
         VStack(spacing:0) {
             //  ========== 검색 뷰 ===========
-            SearchBarView(searchText: $searchText)
+            SearchBarView(isKeyBoardOpen: $isKeyboardOpen,searchText: $searchText)
                 .padding(.horizontal)
                 .padding(.top)
             List {
-                ForEach(vm.exercises, id:\.id) { exercise in
-                    Section {
-                        //  ========== 리스트 내의 버튼 ==========
-                        Button {
-                            //  Routine에서 호출 됐을 때
-                            if self.isSheetPop {
-                                self.selectExercise = exercise
-                                self.mode.wrappedValue.dismiss()
-                            }
-                        } label:{
-                            HStack {
-                                //  ========== 버튼 아이콘 ===========
-                                Circle()
-                                    .foregroundColor(Color(hex:exercise.symbolColorHex ))
-                                    .overlay(
-                                        Image(systemName:exercise.symbolName )
-                                            .resizable()
-                                            .scaledToFit()
-                                            .padding()
-                                            .foregroundColor(.white)
-                                    )
-                                //  ========== 운동명 ===========
-                                Text(exercise.exerciseName)
-                                    .lineLimit(0)
-                                    .font(Font.system(size: 25, weight: .regular, design: .rounded))
-                                    .padding(.leading)
-                                    .foregroundColor(.black)
-                                Spacer()
-                                VStack {
+                ForEach(exercises, id:\.id) { exercise in
+                    if searchText == "" || exercise.exerciseName.contains(searchText) {
+                        Section {
+                            //  ========== 리스트 내의 버튼 ==========
+                            Button {
+                                //  Routine에서 호출 됐을 때
+                                if self.isSheetPop {
+                                    self.selectExercise = exercise
+                                    self.mode.wrappedValue.dismiss()
+                                }
+                            } label:{
+                                HStack {
+                                    //  ========== 버튼 아이콘 ===========
+                                    Circle()
+                                        .foregroundColor(Color(hex:exercise.symbolColorHex))
+                                        .overlay(
+                                            Image(systemName:exercise.symbolName)
+                                                .resizable()
+                                                .scaledToFit()
+                                                .padding()
+                                                .foregroundColor(.white)
+                                        )
+                                        .padding(.vertical,8)
+                                    //  ========== 운동명 ===========
+                                    Text(exercise.exerciseName)
+                                        .lineLimit(0)
+                                        .font(Font.system(size: 25, weight: .regular, design: .rounded))
+                                        .padding(.leading)
+                                        .foregroundColor(.black)
                                     Spacer()
-                                    //  ========== 운동 부위 ===========
-                                    Text(exercise.exercisePart)
-                                        .foregroundColor(.gray.opacity(0.6))
+                                    VStack {
+                                        Spacer()
+                                        //  ========== 운동 부위 ===========
+                                        Text(exercise.exercisePart)
+                                            .foregroundColor(.gray.opacity(0.6))
+                                    }
                                 }
                             }
+                            .frame(height: UIScreen.main.bounds.height*0.1)
                         }
-                        .frame(height: UIScreen.main.bounds.height*0.1)
-                    }
-                    .listRowBackground(Color.gray.opacity(0.2))
-                    
-                    //  스와이프 관련
-                    .swipeActions(content: {
-                        Button {
-                            withAnimation(Animation.linear) {
-                                self.vm.modifyTargetExercise = exercise
-                                self.vm.deleteExercise()
-                                self.vm.readExercise()
+                        .listRowBackground(Color.init(hex: "E2E2E4"))
+                        .listRowInsets(.none)
+                        //  스와이프 관련
+                        .customSwipeAction(isSwipeAble: !isKeyboardOpen) {
+                            Button {
+                                withAnimation(Animation.linear) {
+                                    self.vm.modifyTargetExercise = exercise
+                                    self.vm.deleteExercise()
+                                    self.vm.readExercise()
+                                }
+                            }label: {
+                                Image(systemName: "trash.fill")
                             }
-                        }label: {
-                            Image(systemName: "trash.fill")
+                            .tint(Color(hex: "ED4337"))
+                            Button {
+                                self.vm.modifyTargetExercise = exercise
+                                self.isGoCreateView = true
+                            }label: {
+                                Image(systemName: "square.and.pencil")
+                            }
+                            .tint(Color(hex: "5DBB63"))
                         }
-                        .tint(Color(hex: "ED4337"))
-                        Button {
-                            self.vm.modifyTargetExercise = exercise
-                            self.isGoCreateView = true
-                        }label: {
-                            Image(systemName: "square.and.pencil")
-                        }
-                        .tint(Color(hex: "5DBB63"))
-                    })
-                    .listRowInsets(.none)
+                    }
                 }
             }
             .background(Color.clear)
+            .listRowBackground(Color.init(hex: "FFFFFF"))
             .scrollContentBackground(.hidden)
+            .customTapGesture(isTapAble: isKeyboardOpen) {
+                UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+            }
         }
         //  MARK: 뷰 생성 시점
         .onAppear() {
-            self.vm.readExercise()
+            self.vm.exercisesClosure = { exercises in
+                withAnimation {
+                    self.exercises = exercises
+                }
+            }
             self.vm.modifyTargetClosure = { exercise in
-                self.modifyTargetExercise = exercise
+                withAnimation {
+                    self.modifyTargetExercise = exercise
+                }
             }
             //  vm의 alert 메세지가 변화할 때 마다 alert를 자동으로 활성화 해주기 위한 로직
             self.vm.alertClosure = {
                 self.isAlert = true
             }
+            
+            self.vm.readExercise()
         }
         //  MARK: Navigation 관련
+        .navigationTitle("운동 목록")
+        .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             if !isSheetPop {
                 ToolbarItem(placement: .navigationBarTrailing) {

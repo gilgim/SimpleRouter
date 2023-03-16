@@ -71,6 +71,8 @@ struct ExerciseCreate: View {
             }
         }
         //  MARK: Navigation 관련
+        .navigationTitle("운동 생성")
+        .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button(vm.viewType == .nomal ? "생성":"수정") {
@@ -92,6 +94,7 @@ struct ExerciseCreate: View {
         } message: {
             Text(vm.alertMessage)
         }
+        .modifier(KeyboardHideModifier())
 
     }
 }

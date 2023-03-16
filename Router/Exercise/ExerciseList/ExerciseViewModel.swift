@@ -16,16 +16,23 @@ class ExerciseViewModel: ObservableObject {
     var alertClosure: ()->() = {}
     
 	@Published var exercises: [Exercise] = []
+    var exercisesClosure: ([Exercise])->() = {_ in}
+    
     @Published var modifyTargetExercise: Exercise? = nil
+
     var modifyTargetClosure: (Exercise?) -> () = {_ in}
     init() {
         $alertMessage.sink { [weak self] _ in
             self?.alertClosure()
         }
         .store(in: &cancellables)
-        
         $modifyTargetExercise.sink { [weak self] exercise in
             self?.modifyTargetClosure(exercise)
+        }
+        .store(in: &cancellables)
+        
+        $exercises.sink { [weak self] exercises in
+            self?.exercisesClosure(exercises)
         }
         .store(in: &cancellables)
     }
@@ -48,6 +55,5 @@ class ExerciseViewModel: ObservableObject {
         } catch {
             fatalError("\(error)")
         }
-        self.modifyTargetExercise = nil
     }
 }
