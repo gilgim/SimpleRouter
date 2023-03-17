@@ -10,9 +10,14 @@ import Combine
 
 struct RoutineCreateView: View {
     @Environment(\.presentationMode) var mode
+    /// Message 업데이트 시 자동 alert
+    @State var isAlert: Bool = false
     
+    @State var selectExercises: [Exercise] = [.init(exerciseName: "렛풀 다운", symbolName: "figure.walk", symbolColorHex: "3CB371", exercisePart: "운동부위명 입니다.", restTime: 60, set: 5)]
+//    @State var selectExercises: [Exercise] = []
+    
+    @State var selectExercise: Exercise? = nil
     @State var isPresentExercise = false
-	@State var selectExercise: Exercise? = nil
     
     @StateObject var vm = RoutineCreateViewModel()
     var body: some View {
@@ -20,31 +25,68 @@ struct RoutineCreateView: View {
             Section("이름") {
                 TextField("루틴명", text: $vm.routineName)
             }
-            ForEach(vm.selectExercises.indices, id:\.self) { i in
-                Section(vm.selectExercises[i].exerciseName) {
-                    Button {
-                        
-                    }label: {
+            Section("선택된 운동") {
+                ForEach(selectExercises, id:\.self) { exercise in
+                    HStack {
                         HStack {
-                            Circle()
-                                .foregroundColor(Color(hex:vm.selectExercises[i].symbolColorHex ))
-                                .overlay(
-                                    Image(systemName:vm.selectExercises[i].symbolName )
-                                        .resizable()
-                                        .scaledToFit()
-                                        .padding()
-                                        .foregroundColor(.white)
-                                )
-                            VStack {
-                                Text(vm.selectExercises[i].exerciseName )
-                                Text(vm.selectExercises[i].exercisePart )
+                            //  패딩과 라인이 곂치지 않게 하기 위한 VStack
+                            VStack{
+                                Circle()
+                                    .foregroundColor(Color(hex:exercise.symbolColorHex))
+                                    .overlay(
+                                        Image(systemName:exercise.symbolName)
+                                            .resizable()
+                                            .scaledToFit()
+                                            .padding()
+                                            .foregroundColor(.white)
+                                    )
+                                    .padding(.horizontal)
                             }
+                            //  라인이 텍스트먼저 인식해서 그림으로 인식으로 바꾸기
+                            .alignmentGuide(.listRowSeparatorLeading) { d in
+                                d[.leading]
+                            }
+                            //  운동 정보
+                            VStack(alignment: .leading) {
+                                //  운동명
+                                Text(exercise.exerciseName)
+                                    .font(Font.system(size: 24, weight: .medium, design: .rounded))
+                                //  운동 세트 & 휴식
+                                Text("\(exercise.set ?? 0)세트  |  \(exercise.restTime ?? 0)초")
+                                    .foregroundColor(.gray)
+                                    .padding(.bottom,2)
+                                
+                                //  부가적인 운동 항목이 추가되면 이 버튼을 통해 수정 및 추가 할 수 있다.
+                                Button {
+                                    self.vm.setRestSettingAlert()
+                                }label: {
+                                    HStack(spacing:0) {
+                                        Text("더보기")
+                                        Image(systemName: "rectangle.and.pencil.and.ellipsis")
+                                    }
+                                }
+                                .foregroundColor(.init(hex: exercise.symbolColorHex))
+                            }
+                            .padding(.trailing)
+                            .fixedSize()
+                            Divider()
+                                .overlay {Color.gray}
+                            //  ========== 수정버튼 ==========
+                            Button {
+                                self.vm.isSetRestAlert = true
+                            }label: {
+                                Image(systemName: "square.and.pencil")
+                                    .resizable()
+                                    .scaledToFit()
+                                    .padding(20)
+                            }
+                            .foregroundColor(.init(hex: exercise.symbolColorHex))
                         }
-                        .frame(height:50)
+                        .padding(.vertical)
                     }
+                    .frame(height:UIScreen.main.bounds.height*0.15)
                 }
-			}
-            Section {
+                .buttonStyle(BorderlessButtonStyle())
                 Button {
                     self.isPresentExercise = true
                 }label: {
@@ -54,8 +96,27 @@ struct RoutineCreateView: View {
                         Spacer()
                     }
                 }
-            }
+			}
+            .listRowInsets(.init(top: 0, leading: 0, bottom: 0, trailing: 0))
 		}
+        //  MARK: 생명주기
+        .onAppear() {
+            self.vm.alertClosure = {
+                self.isAlert = true
+            }
+            self.vm.selectExercisesClosure = { exercises in
+                self.selectExercises = exercises
+            }
+            self.vm.selectExerciseClosure = { exercise in
+                self.selectExercise = exercise
+            }
+            self.vm.setRestAlertClosure = { isAlert in
+                withAnimation {
+                    ContentView.customAlertPublisher.send(isAlert)
+                }
+            }
+        }
+        //  MARK: Navigation 관련
 		.toolbar(content: {
 			ToolbarItem(placement:.navigationBarTrailing) {
 				Button("생성") {
@@ -64,20 +125,22 @@ struct RoutineCreateView: View {
 				}
 			}
 		})
-        .sheet(isPresented: $isPresentExercise, onDismiss: {
-            if var selectExercise = self.selectExercise {
-				//	세트 수 5개
-				selectExercise.set = 5
-				//	휴식 시간 1분
-				selectExercise.restTime = 60
-                self.vm.selectExercises.append(selectExercise)
-            }
-            self.selectExercise = nil
-        }, content: {
-			ExerciseView(isSheetPop: $isPresentExercise,selctExercise: $selectExercise)
-		})
 		.navigationTitle("루틴 생성")
 		.navigationBarTitleDisplayMode(.large)
+        
+        //  MARK: Alert 관련
+        //  운동리스트 뷰 가져오기
+        .sheet(isPresented: $isPresentExercise, onDismiss: {
+            self.vm.setSetAndRestTime()
+        }, content: {
+            ExerciseView(isSheetPop: $isPresentExercise,selctExercise: $vm.selectExercise)
+        })
+        //  에러 팝업
+        .alert("에러", isPresented: $isAlert, actions: {
+            Button("확인"){}
+        }, message: {
+            Text(vm.alertMessage)
+        })
     }
 }
 
