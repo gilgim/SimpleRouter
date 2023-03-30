@@ -12,13 +12,10 @@ struct RoutineCreateView: View {
     @Environment(\.presentationMode) var mode
     /// Message 업데이트 시 자동 alert
     @State var isAlert: Bool = false
-    
-    @State var selectExercises: [Exercise] = [.init(exerciseName: "렛풀 다운", symbolName: "figure.walk", symbolColorHex: "3CB371", exercisePart: "운동부위명 입니다.", restTime: 60, set: 5)]
-//    @State var selectExercises: [Exercise] = []
-    
+//    @State var selectExercises: [Exercise] = [.init(exerciseName: "렛풀 다운", symbolName: "figure.walk", symbolColorHex: "3CB371", exercisePart: "운동부위명 입니다.", restTime: 60, set: 5)]
+    @State var selectExercises: [Exercise] = []
     @State var selectExercise: Exercise? = nil
     @State var isPresentExercise = false
-    
     @StateObject var vm = RoutineCreateViewModel()
     var body: some View {
 		List {
@@ -58,7 +55,7 @@ struct RoutineCreateView: View {
                                 
                                 //  부가적인 운동 항목이 추가되면 이 버튼을 통해 수정 및 추가 할 수 있다.
                                 Button {
-                                    self.vm.setRestSettingAlert()
+                                    
                                 }label: {
                                     HStack(spacing:0) {
                                         Text("더보기")
@@ -73,7 +70,10 @@ struct RoutineCreateView: View {
                                 .overlay {Color.gray}
                             //  ========== 수정버튼 ==========
                             Button {
-                                self.vm.isSetRestAlert = true
+                                withAnimation {
+                                    self.sample(exercise: exercise)
+                                }
+//                                self.vm.isSetRestAlert = true
                             }label: {
                                 Image(systemName: "square.and.pencil")
                                     .resizable()
@@ -110,24 +110,19 @@ struct RoutineCreateView: View {
             self.vm.selectExerciseClosure = { exercise in
                 self.selectExercise = exercise
             }
-            self.vm.setRestAlertClosure = { isAlert in
-                withAnimation {
-                    ContentView.customAlertPublisher.send(isAlert)
-                }
-            }
         }
         //  MARK: Navigation 관련
 		.toolbar(content: {
 			ToolbarItem(placement:.navigationBarTrailing) {
 				Button("생성") {
-                    self.vm.createRoutine()
-                    self.mode.wrappedValue.dismiss()
+                    if self.vm.createRoutine() {
+                        self.mode.wrappedValue.dismiss()
+                    }
 				}
 			}
 		})
 		.navigationTitle("루틴 생성")
 		.navigationBarTitleDisplayMode(.large)
-        
         //  MARK: Alert 관련
         //  운동리스트 뷰 가져오기
         .sheet(isPresented: $isPresentExercise, onDismiss: {
@@ -147,5 +142,20 @@ struct RoutineCreateView: View {
 struct RoutineCreateView_Previews: PreviewProvider {
     static var previews: some View {
         RoutineCreateView()
+    }
+}
+
+//  MARK: -Function
+extension RoutineCreateView {
+    func sample(exercise: Exercise) {
+        //  업데이트를 위한 클로져.
+        let closure = {
+            self.selectExercises.append(.init())
+            self.selectExercises.removeLast()
+        }
+        let vc = SetRestAlertViewController(closure: closure, setPublisher: exercise.setPublisher, restPublisher: exercise.restPublisher, beforeSetInt: exercise.set!, beforeRestInt: exercise.restTime!)
+        vc.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
+        vc.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
+        UIApplication.shared.windows.first?.rootViewController?.present(vc, animated: true)
     }
 }

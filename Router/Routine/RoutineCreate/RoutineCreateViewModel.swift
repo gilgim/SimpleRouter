@@ -23,8 +23,6 @@ class RoutineCreateViewModel: ObservableObject {
     @Published var selectExercise: Exercise? = nil
     var selectExerciseClosure: (Exercise?)->() = {_ in}
     
-    @Published var isSetRestAlert: Bool = false
-    var setRestAlertClosure: (Bool) -> () = {_ in}
     //  뷰와 뷰모델 데이터와의 바인딩 처리를 위한 초기화
     init() {
         $alertMessage.sink { [weak self] _ in
@@ -41,19 +39,10 @@ class RoutineCreateViewModel: ObservableObject {
             self?.selectExerciseClosure(exercise)
         }
         .store(in: &cancelables)
-        
-        $isSetRestAlert.sink { [weak self] value in
-            self?.setRestAlertClosure(value)
-        }
-        .store(in: &cancelables)
-    }
-    /// 세트 수와 휴식 시간을 설정하는 sheet 팝업 함수
-    func setRestSettingAlert() {
-        self.isSetRestAlert = true
     }
     /// 운동 추가 시 세트 개수와 휴식 시간을 설정하는 함수
     func setSetAndRestTime() {
-        guard var selectExercise = self.selectExercise else {return}
+        guard let selectExercise = self.selectExercise else {return}
         //  기본 세트 : 5세트
         selectExercise.set = 5
         //  기본 휴식 시간 : 1분
@@ -61,8 +50,11 @@ class RoutineCreateViewModel: ObservableObject {
         self.selectExercises.append(selectExercise)
         self.selectExercise = nil
     }
-    //  빈값이 무조건 없다는 가정으로 한다.
-    func createRoutine() {
+    
+    func createRoutine() -> Bool {
+        guard self.routineName != "" else {self.alertMessage = "이름을 입력해주세요.";return false}
+        guard realm().object(ofType: RealmRoutine.self, forPrimaryKey: self.routineName) == nil else {self.alertMessage = "이미 존재하는 루틴입니다.";return false}
+        guard self.selectExercises.count > 0 else {self.alertMessage = "선택된 운동이 없습니다.";return false}
         let realmRoutine = RealmRoutine()
         realmRoutine.routineName = self.routineName
         let listExerciseName = List<String>()
@@ -75,6 +67,7 @@ class RoutineCreateViewModel: ObservableObject {
             try realm().write({
                 realm().add(realmRoutine)
             })
+            return true
         }
         catch {
             fatalError("\(error)")

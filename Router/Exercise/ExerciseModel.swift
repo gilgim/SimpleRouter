@@ -6,11 +6,12 @@
 //
 
 import Foundation
-
+import Combine
 struct ExerciseModel {
    
 }
-struct Exercise: Hashable {
+class Exercise: Hashable {
+    private var canacellable = Set<AnyCancellable>()
     let id = UUID()
 	/// 운동 명
 	let exerciseName: String
@@ -22,8 +23,11 @@ struct Exercise: Hashable {
 	let exercisePart: String
     /// 휴식시간
     var restTime: Int16?
+    let restPublisher = PassthroughSubject<Int16, Never>()
     /// 세트 수
     var set: Int16?
+    let setPublisher = PassthroughSubject<Int16, Never>()
+    
     init(exerciseName: String = "NotDefine", symbolName: String = "figure.walk", symbolColorHex: String = "3CB371", exercisePart: String = "NotDefine", restTime: Int16? = nil, set: Int16? = nil) {
         self.exerciseName = exerciseName
         self.symbolName = symbolName
@@ -31,5 +35,19 @@ struct Exercise: Hashable {
         self.exercisePart = exercisePart
         self.restTime = restTime
         self.set = set
+        self.setPublisher.sink { [weak self] set in
+            self?.set = set
+        }
+        .store(in: &canacellable)
+        self.restPublisher.sink { [weak self] rest in
+            self?.restTime = rest
+        }
+        .store(in: &canacellable)
+    }
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
+    }
+    static func == (lhs: Exercise, rhs: Exercise) -> Bool {
+        return lhs.id == rhs.id
     }
 }

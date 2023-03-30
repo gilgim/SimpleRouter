@@ -22,3 +22,12 @@ struct RouterApp: App {
         }
     }
 }
+
+struct Configuration {
+    struct LargeDevice {
+        let listCircleSize = CGSize(width: 90, height: 90)
+    }
+    struct SmallDevice {
+        let listCircleSize = CGSize(width: 80, height: 80)
+    }
+}

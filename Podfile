@@ -18,4 +18,5 @@ target 'Router' do
 #=========== 외부 라이브러리 ============
     # Realm 설치
   pod 'RealmSwift'
+  pod 'SnapKit', '~> 5.6.0'
 end
