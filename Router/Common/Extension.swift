@@ -38,3 +38,34 @@ extension Color {
             )
         }
 }
+
+extension View {
+    @ViewBuilder func isHidden(_ state: Bool) -> some View {
+        if state {
+            self.hidden()
+        }
+        else {
+            self
+        }
+    }
+    @ViewBuilder func customTapGesture(isTapAble: Bool, _ closure: @escaping () -> ()) -> some View {
+        if isTapAble {
+            self.onTapGesture {
+                closure()
+            }
+        }
+        else {
+            self
+        }
+    }
+    @ViewBuilder func customSwipeAction(isSwipeAble: Bool, @ViewBuilder _ content: @escaping () -> some View) -> some View {
+        if isSwipeAble {
+            self.swipeActions {
+                content()
+            }
+        }
+        else {
+            self
+        }
+    }
+}

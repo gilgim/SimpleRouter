@@ -9,12 +9,21 @@ import SwiftUI
 
 struct SearchBarView: View {
 	var placeholder = "운동명"
+    @Binding var isKeyBoardOpen: Bool
     @Binding var searchText: String
     var body: some View {
         HStack(spacing: 0) {
             Image(systemName: "magnifyingglass")
                 .padding()
-            TextField(placeholder,text: $searchText)
+            TextField(placeholder,text: $searchText) { inputAble in
+                if inputAble {
+                    isKeyBoardOpen = true
+                }
+                else {
+                    isKeyBoardOpen = false
+                }
+                print(isKeyBoardOpen)
+            }
             Spacer()
             if searchText != "" {
                 Button {
@@ -28,13 +37,13 @@ struct SearchBarView: View {
         }
         .background() {
             RoundedRectangle(cornerRadius:18)
-                .foregroundColor(.gray.opacity(0.2))
+                .foregroundColor(.init(hex: "E2E2E4"))
         }
     }
 }
 
 struct SearchBarView_Previews: PreviewProvider {
     static var previews: some View {
-        SearchBarView(searchText: .constant(""))
+        SearchBarView(isKeyBoardOpen: .constant(false), searchText: .constant(""))
     }
 }
