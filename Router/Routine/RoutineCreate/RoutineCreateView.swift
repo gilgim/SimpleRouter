@@ -128,7 +128,7 @@ struct RoutineCreateView: View {
         .sheet(isPresented: $isPresentExercise, onDismiss: {
             self.vm.setSetAndRestTime()
         }, content: {
-            ExerciseView(isSheetPop: $isPresentExercise,selctExercise: $vm.selectExercise)
+            ExerciseView(isSheetPop: $isPresentExercise,selectExercise: $vm.selectExercise)
         })
         //  에러 팝업
         .alert("에러", isPresented: $isAlert, actions: {

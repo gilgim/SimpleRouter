@@ -14,13 +14,12 @@ struct RoutineView: View {
     @State var isCreate: Bool = false
     @State var isWorkOut: Bool = false
     @State var userSelectRoutine: String = ""
-    @State var routines: [Routine] = [.init(routineName: "asdf", exercises: [["asd&5&60","asdf&5&70"]])]
 	var body: some View {
 		VStack {
-			SearchBarView(placeholder:"루틴명", searchText: $searchText)
+            SearchBarView(placeholder:"루틴명", isKeyBoardOpen: .constant(false), searchText: $searchText)
 				.padding()
 			List {
-                ForEach(routines, id: \.id) { routine in
+                ForEach(vm.routines, id: \.id) { routine in
                     Button{
                         self.userSelectRoutine = routine.routineName
                         self.isWorkOut = true

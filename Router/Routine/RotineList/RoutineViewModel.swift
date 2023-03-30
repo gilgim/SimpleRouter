@@ -30,14 +30,15 @@ class RoutineViewModel: ObservableObject {
         var totalSet = 0
         var totalRest = 0
         for exercise in routine.exercises {
-            let setAndRestArray = exercise.map({[Int($0.components(separatedBy: "&")[1]) ?? 5, Int($0.components(separatedBy: "&")[2]) ?? 60 ]})
-            for component in setAndRestArray {
-                totalSet += component[0]
-                totalRest += component[1] * (component[0])
-            }
+            totalSet += Int(exercise[1])!
+            totalRest += Int(exercise[1])! * Int(exercise[2])!
         }
         let minute = totalRest/60
         let second = totalRest%60
-        return ("총 \(totalSet) 세트", "총 \(minute)분 \(second)초 휴식")
+        var addString = ""
+        if second != 0 {
+            addString = "\(second)초 "
+        }
+        return ("총 \(totalSet) 세트", "총 \(minute)분 \(addString)휴식")
     }
 }
