@@ -23,7 +23,7 @@ struct RoutineCreateView: View {
                 TextField("루틴명", text: $vm.routineName)
             }
             Section("선택된 운동") {
-                ForEach(selectExercises, id:\.self) { exercise in
+                ForEach(vm.selectExercises, id:\.self) { exercise in
                     HStack {
                         HStack {
                             //  패딩과 라인이 곂치지 않게 하기 위한 VStack
@@ -39,56 +39,60 @@ struct RoutineCreateView: View {
                                     )
                                     .padding(.horizontal)
                             }
-                            //  라인이 텍스트먼저 인식해서 그림으로 인식으로 바꾸기
-                            .alignmentGuide(.listRowSeparatorLeading) { d in
-                                d[.leading]
-                            }
                             //  운동 정보
                             VStack(alignment: .leading) {
                                 //  운동명
                                 Text(exercise.exerciseName)
                                     .font(Font.system(size: 24, weight: .medium, design: .rounded))
                                 //  운동 세트 & 휴식
-                                Text("\(exercise.set ?? 0)세트  |  \(exercise.restTime ?? 0)초")
-                                    .foregroundColor(.gray)
-                                    .padding(.bottom,2)
-                                
-                                //  부가적인 운동 항목이 추가되면 이 버튼을 통해 수정 및 추가 할 수 있다.
-                                Button {
-                                    
-                                }label: {
-                                    HStack(spacing:0) {
-                                        Text("더보기")
-                                        Image(systemName: "rectangle.and.pencil.and.ellipsis")
-                                    }
+                                HStack {
+                                    Text("\(exercise.set ?? 0)세트  |  \(exercise.restTime ?? 0)초")
+                                        .foregroundColor(.gray)
+                                        .padding(.bottom,2)
+                                    Spacer()
                                 }
-                                .foregroundColor(.init(hex: exercise.symbolColorHex))
                             }
-                            .padding(.trailing)
                             .fixedSize()
-                            Divider()
+                            Spacer()
                                 .overlay {Color.gray}
-                            //  ========== 수정버튼 ==========
                             Button {
                                 withAnimation {
-                                    self.sample(exercise: exercise)
+                                    self.vm.alertSetAndRest(exercise: exercise)
+                                    self.keyboardHide()
                                 }
-//                                self.vm.isSetRestAlert = true
                             }label: {
-                                Image(systemName: "square.and.pencil")
-                                    .resizable()
-                                    .scaledToFit()
-                                    .padding(20)
+                                HStack(spacing:0) {
+                                    Image(systemName: "square.and.pencil")
+                                        .resizable()
+                                        .scaledToFit()
+                                        .padding()
+                                }
                             }
                             .foregroundColor(.init(hex: exercise.symbolColorHex))
+                            .buttonStyle(BorderlessButtonStyle())
                         }
                         .padding(.vertical)
                     }
-                    .frame(height:UIScreen.main.bounds.height*0.15)
+                    .frame(height:100)
+                    .swipeActions {
+                        Button {
+                            self.vm.removeExercise(exercise: exercise)
+                        }label: {
+                            Image(systemName: "trash")
+                        }
+                        .tint(.red)
+                        
+                        Button {
+                            
+                        }label: {
+                            Image(systemName: "ellipsis")
+                        }
+                        .tint(.green)
+                    }
                 }
-                .buttonStyle(BorderlessButtonStyle())
                 Button {
                     self.isPresentExercise = true
+                    self.keyboardHide()
                 }label: {
                     HStack {
                         Spacer()
@@ -97,7 +101,6 @@ struct RoutineCreateView: View {
                     }
                 }
 			}
-            .listRowInsets(.init(top: 0, leading: 0, bottom: 0, trailing: 0))
 		}
         //  MARK: 생명주기
         .onAppear() {
@@ -141,21 +144,17 @@ struct RoutineCreateView: View {
 
 struct RoutineCreateView_Previews: PreviewProvider {
     static var previews: some View {
-        RoutineCreateView()
+        Group {
+            RoutineCreateView()
+                .previewDevice(PreviewDevice(rawValue: "iPhone 12 Pro"))
+            RoutineCreateView()
+        }
     }
 }
 
 //  MARK: -Function
 extension RoutineCreateView {
-    func sample(exercise: Exercise) {
-        //  업데이트를 위한 클로져.
-        let closure = {
-            self.selectExercises.append(.init())
-            self.selectExercises.removeLast()
-        }
-        let vc = SetRestAlertViewController(closure: closure, setPublisher: exercise.setPublisher, restPublisher: exercise.restPublisher, beforeSetInt: exercise.set!, beforeRestInt: exercise.restTime!)
-        vc.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
-        vc.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
-        UIApplication.shared.windows.first?.rootViewController?.present(vc, animated: true)
+    func keyboardHide() {
+        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
     }
 }

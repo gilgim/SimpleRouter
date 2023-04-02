@@ -31,6 +31,7 @@ struct WorkOutView: View {
 struct WorkOutView_Previews: PreviewProvider {
     static var previews: some View {
         WorkOutView(routineName: .constant(""))
+//        RunningListView()
     }
 }
 
@@ -38,33 +39,60 @@ struct RunningListView: View {
     @Binding var runningList: [Running]
     @Binding var completeRunningList: [Running]
     @Binding var selectRunning: Running?
-    
     var body: some View {
-        ScrollView(.horizontal, showsIndicators: false) {
-            HStack {
+        ScrollViewWrapper(content:
+            HStack(spacing: 30) {
+                Spacer(minLength: 30)
+                //  운동 끝난 뷰
                 ForEach(completeRunningList, id: \.id) { running in
-                    Button {
-                        selectRunning = running
-                    }label: {
-                        Circle()
-                            .overlay {
-                                Text(running.name)
-                            }
-                            .foregroundColor(.gray)
+                    VStack {
+                        ZStack {
+                            Circle()
+                            Image(systemName: running.symbolName)
+                                .resizable()
+                                .scaledToFit()
+                                .padding(80)
+                                .foregroundColor(.white)
+                        }
+                        .frame(width: circleWidth)
+                        Text("\(running.name)\n완료")
+                            .foregroundColor(.black)
+                            .font(Font.system(size: 24, weight: .bold, design: .rounded))
                     }
+                    .foregroundColor(.gray)
                 }
+                //  운동 하기 전 뷰
                 ForEach(runningList, id: \.id) { running in
                     Button {
                         selectRunning = running
                     }label: {
-                        Circle()
-                            .overlay {
-                                Text(running.name)
+                        VStack {
+                            ZStack {
+                                Circle()
+                                Image(systemName: running.symbolName)
+                                    .resizable()
+                                    .scaledToFit()
+                                    .padding(80)
+                                    .foregroundColor(.white)
                             }
+                            .frame(width: circleWidth)
+                            Text(running.name)
+                                .foregroundColor(.black)
+                                .font(Font.system(size: 24, weight: .bold, design: .rounded))
+                        }
                     }
+                    .foregroundColor(.init(hex: running.symbolHex))
                 }
+                Spacer(minLength: 30)
             }
-        }
+        )
+    }
+}
+extension RunningListView {
+    var circleWidth: CGFloat {
+        let width = UIScreen.main.bounds.width
+        let circleWidth = width - 120
+        return circleWidth
     }
 }
 

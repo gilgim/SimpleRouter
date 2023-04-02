@@ -40,7 +40,24 @@ class RoutineCreateViewModel: ObservableObject {
         }
         .store(in: &cancelables)
     }
-    /// 운동 추가 시 세트 개수와 휴식 시간을 설정하는 함수
+    /// 세트 및 휴식 변경 알림
+    func alertSetAndRest(exercise: Exercise) {
+        //  업데이트를 위한 클로져.
+        let closure = {
+            self.selectExercises.append(.init())
+            self.selectExercises.removeLast()
+        }
+        let vc = SetRestAlertViewController(closure: closure, setPublisher: exercise.setPublisher, restPublisher: exercise.restPublisher, beforeSetInt: exercise.set!, beforeRestInt: exercise.restTime!)
+        vc.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
+        vc.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
+        UIApplication.shared.windows.first?.rootViewController?.present(vc, animated: true)
+    }
+    /// 운동 삭제 함수
+    func removeExercise(exercise: Exercise) {
+        self.selectExercises = self.selectExercises.filter({$0 != exercise})
+    }
+    //   뷰에서 운동을 추가하면 뷰모델과 바인딩 되어있는 선택 운동에 세트와 휴식을 설정
+    /// 운동 추가 시 운동을 선택운동 목록에 추가하는 함수
     func setSetAndRestTime() {
         guard let selectExercise = self.selectExercise else {return}
         //  기본 세트 : 5세트
@@ -50,7 +67,7 @@ class RoutineCreateViewModel: ObservableObject {
         self.selectExercises.append(selectExercise)
         self.selectExercise = nil
     }
-    
+    //  루틴 생성 함수
     func createRoutine() -> Bool {
         guard self.routineName != "" else {self.alertMessage = "이름을 입력해주세요.";return false}
         guard realm().object(ofType: RealmRoutine.self, forPrimaryKey: self.routineName) == nil else {self.alertMessage = "이미 존재하는 루틴입니다.";return false}

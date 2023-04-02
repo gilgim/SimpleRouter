@@ -27,6 +27,7 @@ struct ExerciseCreate: View {
         ScrollView {
             VStack {
                 HStack {
+                    
                     //  ========== 심볼 ==========
                     Circle()
                         .foregroundColor(Color(hex: self.vm.hex))
@@ -37,6 +38,7 @@ struct ExerciseCreate: View {
                                 .foregroundColor(.white)
                                 .padding(20)
                         )
+                    
                     //  ========== 사용자 입력 TextField ==========
                     VStack {
 						TextField("운동명", text: $vm.exerciseName)
@@ -47,9 +49,11 @@ struct ExerciseCreate: View {
                     }
                 }
                 .frame(maxHeight: 120)
+                
                 // ========== 색상 Picker ==========
                 SymbolColorView(hex: $vm.hex)
                     .padding(.vertical)
+                
                 //  ========== 아이콘 Picker ==========
 				SymbolImageView(symbol: $vm.symbol)
                     .padding(.vertical)
@@ -101,7 +105,14 @@ struct ExerciseCreate: View {
 
 struct ExerciseCreate_Previews: PreviewProvider {
     static var previews: some View {
-        ExerciseCreate()
+        Group {
+            ExerciseCreate()
+                .previewDevice(PreviewDevice(rawValue: "iPhone 12 Pro"))
+                
+            ExerciseCreate()
+                .previewDevice(PreviewDevice.init(rawValue: "iPhone SE"))
+                
+        }
     }
 }
 
@@ -160,7 +171,7 @@ struct SymbolColorView: View {
                             .overlay(
                                 Circle()
                                     .stroke(lineWidth: 2)
-                                    .padding(5)
+                                    .padding(2)
                                     .foregroundColor(.white)
                             )
                             .padding(.bottom)

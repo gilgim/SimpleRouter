@@ -16,7 +16,7 @@ struct ExerciseView: View {
     @State var searchText: String = ""
     @State var isKeyboardOpen: Bool = false
     @State var exercises: [Exercise] = []
-    
+//    @State var sample = [Exercise(exerciseName: "샘플", symbolName: "person.fill", symbolColorHex: "3F5136", exercisePart: "샘플부위", restTime: 0, set: 0)]
 	@Binding var selectExercise: Exercise?
     @Binding var isSheetPop: Bool
     
@@ -36,57 +36,53 @@ struct ExerciseView: View {
             SearchBarView(isKeyBoardOpen: $isKeyboardOpen,searchText: $searchText)
                 .padding(.horizontal)
                 .padding(.top)
+            
+            //  ========== 리스트 ==========
             List {
                 ForEach(exercises, id:\.id) { exercise in
                     if searchText == "" || exercise.exerciseName.contains(searchText) {
-                        Section {
-                            //  ========== 리스트 내의 버튼 ==========
-                            Button {
-                                //  Routine에서 호출 됐을 때
-                                if self.isSheetPop {
-                                    self.selectExercise = exercise
-                                    self.mode.wrappedValue.dismiss()
-                                }
-                            } label:{
-                                HStack {
-                                    //  ========== 버튼 아이콘 ===========
+                        //  ========== 리스트 내의 버튼 ==========
+                        Button {
+                            //  Routine에서 호출 됐을 때
+                            if self.isSheetPop {
+                                self.selectExercise = exercise
+                                self.mode.wrappedValue.dismiss()
+                            }
+                        } label:{
+                            HStack {
+                                //  ========== 버튼 아이콘 ===========
+                                ZStack {
                                     Circle()
                                         .foregroundColor(Color(hex:exercise.symbolColorHex))
-                                        .overlay(
-                                            Image(systemName:exercise.symbolName)
-                                                .resizable()
-                                                .scaledToFit()
-                                                .padding()
-                                                .foregroundColor(.white)
-                                        )
-                                        .padding(.vertical,8)
-                                    //  ========== 운동명 ===========
-                                    Text(exercise.exerciseName)
-                                        .lineLimit(0)
-                                        .font(Font.system(size: 25, weight: .regular, design: .rounded))
-                                        .padding(.leading)
-                                        .foregroundColor(.black)
+                                    Image(systemName:exercise.symbolName)
+                                        .resizable()
+                                        .scaledToFit()
+                                        .foregroundColor(.white)
+                                        .padding(20)
+                                }
+                                //  ========== 운동명 ===========
+                                //  추후 기록된 운동 정보로 값 갱신
+                                Text(exercise.exerciseName)
+                                    .lineLimit(0)
+                                    .font(Font.system(size: 25, weight: .regular, design: .rounded))
+                                    .padding(.leading)
+                                    .foregroundColor(.black)
+                                Spacer()
+                                VStack {
                                     Spacer()
-                                    VStack {
-                                        Spacer()
-                                        //  ========== 운동 부위 ===========
-                                        Text(exercise.exercisePart)
-                                            .foregroundColor(.gray.opacity(0.6))
-                                    }
+                                    //  ========== 운동 부위 ===========
+                                    Text(exercise.exercisePart)
+                                        .foregroundColor(.gray.opacity(0.6))
                                 }
                             }
-                            .frame(height: UIScreen.main.bounds.height*0.1)
                         }
-                        .listRowBackground(Color.init(hex: "E2E2E4"))
-                        .listRowInsets(.none)
+                        .frame(height: 80).padding(.vertical,5)
                         //  스와이프 관련
                         .customSwipeAction(isSwipeAble: !isKeyboardOpen) {
                             Button {
-                                withAnimation(Animation.linear) {
-                                    self.vm.modifyTargetExercise = exercise
-                                    self.vm.deleteExercise()
-                                    self.vm.readExercise()
-                                }
+                                self.vm.modifyTargetExercise = exercise
+                                self.vm.deleteExercise()
+                                self.vm.readExercise()
                             }label: {
                                 Image(systemName: "trash.fill")
                             }
@@ -102,9 +98,7 @@ struct ExerciseView: View {
                     }
                 }
             }
-            .background(Color.clear)
-            .listRowBackground(Color.init(hex: "FFFFFF"))
-            .scrollContentBackground(.hidden)
+            .listStyle(InsetListStyle())
             .customTapGesture(isTapAble: isKeyboardOpen) {
                 UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
             }
@@ -154,6 +148,7 @@ struct ExerciseView: View {
                 }
             }
         }
+        //  운동 생성 및 운동 수정 네비게이션.
         .navigationDestination(isPresented: $isGoCreateView) {
             ExerciseCreate(exercise: $modifyTargetExercise)
         }
@@ -168,6 +163,13 @@ struct ExerciseView: View {
 
 struct ExerciseView_Previews: PreviewProvider {
     static var previews: some View {
-        ExerciseView()
+        Group {
+            ExerciseView()
+                .previewDevice(PreviewDevice(rawValue: "iPhone 12 Pro"))
+                
+            ExerciseView()
+                .previewDevice(PreviewDevice.init(rawValue: "iPhone SE"))
+                
+        }
     }
 }

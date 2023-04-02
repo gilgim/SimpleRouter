@@ -11,8 +11,12 @@ struct ExerciseModel {
    
 }
 class Exercise: Hashable {
-    private var canacellable = Set<AnyCancellable>()
+    //  MARK:   운동에 접근하기 위한 반응형 변수들
     let id = UUID()
+    private var canacellable = Set<AnyCancellable>()
+    let restPublisher = PassthroughSubject<Int16, Never>()
+    let setPublisher = PassthroughSubject<Int16, Never>()
+
 	/// 운동 명
 	let exerciseName: String
 	/// SFSymbol 사용
@@ -23,11 +27,10 @@ class Exercise: Hashable {
 	let exercisePart: String
     /// 휴식시간
     var restTime: Int16?
-    let restPublisher = PassthroughSubject<Int16, Never>()
     /// 세트 수
     var set: Int16?
-    let setPublisher = PassthroughSubject<Int16, Never>()
     
+    /// 운동 변수 설정 및 퍼블리셔 설정
     init(exerciseName: String = "NotDefine", symbolName: String = "figure.walk", symbolColorHex: String = "3CB371", exercisePart: String = "NotDefine", restTime: Int16? = nil, set: Int16? = nil) {
         self.exerciseName = exerciseName
         self.symbolName = symbolName
@@ -44,9 +47,11 @@ class Exercise: Hashable {
         }
         .store(in: &canacellable)
     }
+    //  퍼블리셔 할당을 위한 고유 id 할당
     func hash(into hasher: inout Hasher) {
         hasher.combine(id)
     }
+    //  클래스 비교함수
     static func == (lhs: Exercise, rhs: Exercise) -> Bool {
         return lhs.id == rhs.id
     }

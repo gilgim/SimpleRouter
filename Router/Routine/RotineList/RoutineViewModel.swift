@@ -6,12 +6,30 @@
 //
 
 import Foundation
-import CoreData
+import Combine
 
 class RoutineViewModel: ObservableObject {
-    var model: ExerciseModel? = nil
+    var cancellables = Set<AnyCancellable>()
     @Published var routines: [Routine] = []
     
+    /// alertMessage가 변경될 때 마다 뷰에서는 자동적으로 alert가 실행된다.
+    @Published var alertMessage: String = "이것은 알림 기본값 입니다."
+    var alertClosure: ()->() = {}
+    
+    @Published var modifyTargetRoutine: Routine? = nil
+    var modifyTargetClosure: (Routine?) -> () = {_ in}
+    
+    init() {
+        $alertMessage.sink { [weak self] _ in
+            self?.alertClosure()
+        }
+        .store(in: &cancellables)
+        
+        $modifyTargetRoutine.sink { [weak self] value in
+            self?.modifyTargetClosure(value)
+        }
+        .store(in: &cancellables)
+    }
     func readRoutine() {
         self.routines = []
         let realmRoutines = realm().objects(RealmRoutine.self)
@@ -24,7 +42,20 @@ class RoutineViewModel: ObservableObject {
             routines.append(routine)
         }
     }
-    
+    func removeRoutine(routine: Routine) {
+        guard let object = realm().object(ofType: RealmRoutine.self, forPrimaryKey: routine.routineName)
+        else {
+            self.alertMessage = "조회할 수 없습니다."
+            return
+        }
+        do {
+            try realm().write({
+                realm().delete(object)
+            })
+        } catch {
+            fatalError("\(error)")
+        }
+    }
     /// 총 세트 수 총 휴식 수 계산하는 함수
     func calcSetAndRest(routine: Routine) -> (totalSet: String, totalRest: String){
         var totalSet = 0

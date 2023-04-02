@@ -34,6 +34,7 @@
 		37B42A0629AC2746003728E1 /* RoutineCreateViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B42A0529AC2746003728E1 /* RoutineCreateViewModel.swift */; };
 		A614430609B7D5A81ED13DBB /* Pods_Router.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 17BFD58CB2FF9F357CC583A8 /* Pods_Router.framework */; };
 		B053FDF329CEDA7D00971C7D /* SetRestAlertViewConteroller.swift in Sources */ = {isa = PBXBuildFile; fileRef = B053FDF229CEDA7D00971C7D /* SetRestAlertViewConteroller.swift */; };
+		B0F8FA1629D91D3200021D55 /* ScrollViewWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0F8FA1529D91D3200021D55 /* ScrollViewWrapper.swift */; };
 		B18E63F8CE1E9B0D19CD0C45 /* Pods_RouterTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83F732DD495AA3E6397D7AF9 /* Pods_RouterTests.framework */; };
 		C372882429A9F0EA00EDCBA8 /* ExerciseCreateViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C372882329A9F0E900EDCBA8 /* ExerciseCreateViewModel.swift */; };
 		C372884229AB938300EDCBA8 /* RoutineCreateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C372884029AB938300EDCBA8 /* RoutineCreateView.swift */; };
@@ -92,6 +93,7 @@
 		775E72F0F0545CEB1D76ABD6 /* Pods-Router.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Router.debug.xcconfig"; path = "Target Support Files/Pods-Router/Pods-Router.debug.xcconfig"; sourceTree = "<group>"; };
 		83F732DD495AA3E6397D7AF9 /* Pods_RouterTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RouterTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B053FDF229CEDA7D00971C7D /* SetRestAlertViewConteroller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetRestAlertViewConteroller.swift; sourceTree = "<group>"; };
+		B0F8FA1529D91D3200021D55 /* ScrollViewWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollViewWrapper.swift; sourceTree = "<group>"; };
 		C372882329A9F0E900EDCBA8 /* ExerciseCreateViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseCreateViewModel.swift; sourceTree = "<group>"; };
 		C372883A29AA5D4700EDCBA8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		C372884029AB938300EDCBA8 /* RoutineCreateView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoutineCreateView.swift; sourceTree = "<group>"; };
@@ -263,6 +265,7 @@
 			isa = PBXGroup;
 			children = (
 				37263F3129BFEDC100A0175B /* WorkOutView.swift */,
+				B0F8FA1529D91D3200021D55 /* ScrollViewWrapper.swift */,
 				37263F2D29BFEDA300A0175B /* WorkOutViewModel.swift */,
 				37263F2B29BFED9700A0175B /* WorkOutModel.swift */,
 			);
@@ -555,6 +558,7 @@
 				371C737329A4AFB000FA1E22 /* ContentView.swift in Sources */,
 				C372882429A9F0EA00EDCBA8 /* ExerciseCreateViewModel.swift in Sources */,
 				37263F3429C155D300A0175B /* Enum.swift in Sources */,
+				B0F8FA1629D91D3200021D55 /* ScrollViewWrapper.swift in Sources */,
 				371C73A329A4B2EB00FA1E22 /* ExerciseModel.swift in Sources */,
 				3751807529AC48BC0059183F /* RoutineModel.swift in Sources */,
 				C372884229AB938300EDCBA8 /* RoutineCreateView.swift in Sources */,
@@ -732,10 +736,11 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Router/Preview Content\"";
-				DEVELOPMENT_TEAM = 3RPG64SDVF;
+				DEVELOPMENT_TEAM = AZQ9YD7HMA;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Router/Info.plist;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -745,7 +750,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.SimpleRouter;
+				PRODUCT_BUNDLE_IDENTIFIER = com.SimpleRouter.gilgim;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -762,10 +767,11 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Router/Preview Content\"";
-				DEVELOPMENT_TEAM = 3RPG64SDVF;
+				DEVELOPMENT_TEAM = AZQ9YD7HMA;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Router/Info.plist;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -775,7 +781,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.SimpleRouter;
+				PRODUCT_BUNDLE_IDENTIFIER = com.SimpleRouter.gilgim;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;

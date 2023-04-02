@@ -19,7 +19,6 @@ class ExerciseViewModel: ObservableObject {
     var exercisesClosure: ([Exercise])->() = {_ in}
     
     @Published var modifyTargetExercise: Exercise? = nil
-
     var modifyTargetClosure: (Exercise?) -> () = {_ in}
     init() {
         $alertMessage.sink { [weak self] _ in
