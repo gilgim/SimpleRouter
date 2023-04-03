@@ -13,6 +13,7 @@ class WorkOutViewModel: ObservableObject {
     @Published var runningList: [Running] = []
     @Published var completeRunningList: [Running] = []
     @Published var selectRunning: Running?
+    
     func readRoutine() {
         guard let routineObject = realm().object(ofType: RealmRoutine.self, forPrimaryKey: self.routineName) else {return}
         let exerciseInfos = Array(routineObject.exercisesInfos)
@@ -24,9 +25,33 @@ class WorkOutViewModel: ObservableObject {
         }
     }
 }
+
+class RunningListViewModel: ObservableObject {
+    var cancellables = Set<AnyCancellable>()
+    @Published var alertMessage: String = "이것은 알림 기본값 입니다."
+    var alertClosure: ()->() = {}
+    
+    init() {
+        $alertMessage.sink { [weak self] _ in
+            self?.alertClosure()
+        }
+        .store(in: &cancellables)
+    }
+}
+
 class SelectRunningViewModel: ObservableObject {
+    enum RunningState: String {
+        case start = "시작"
+        case rest = "휴식"
+        case complete = "완료"
+    }
+    @Published var runningState: RunningState = .start
+    
     //  MARK: ViewAlert
     private var cancellables = Set<AnyCancellable>()
+    
+    @Published var alertMessage: String = "이것은 알림 기본값 입니다."
+    var alertClosure: ()->() = {}
     
     //  MARK: 전체 운동 목록
     @Published var runningList: [Running] = []
@@ -41,16 +66,29 @@ class SelectRunningViewModel: ObservableObject {
     var selectRunningClosure: (Running?)->() = {_ in}
     
     var setInfos: [String] = []
+    
     //  MARK: 한 세트 당 무게
-    @Published var weight: Int = 0
-    var weightString: String {
+    enum WeightUnit: String {
+        case kg, lh
+    }
+    //  무게 단위
+    @Published var weightUnit: WeightUnit = .kg
+    //  저장되는 무게 문자열 값
+    @Published var weightString: String = ""
+    //  텍스트 필드에서 사용하는 것
+    var weightText: String {
         get {
-            return weight == 0 ? "" : String(weight)
+            return weightString
         }
         set {
             DispatchQueue.main.async {
-                if newValue.allSatisfy({$0.isNumber}) {
-                    self.weight = Int(newValue) ?? 0
+                if newValue.filter({$0 == "."}).count == 1 || newValue.filter({$0 == "."}).count == 0  {
+                    if newValue.allSatisfy({
+                        return ($0 == "." || $0.isNumber)
+                    })
+                    {
+                        self.weightString = newValue
+                    }
                 }
             }
         }
@@ -69,22 +107,23 @@ class SelectRunningViewModel: ObservableObject {
             }
         }
     }
-    
+    //  1세트 운동 타이머
     var runningTimer: Timer?
-    @Published var runningTime: Int = 0
+    @Published var runningTime: Double = 0
     
+    //  휴식시간 타이머
     var restTimer: Timer?
-    @Published var restTime: Int = 0
+    var restTime: Int = 0
+    @Published var restTimeString: String = ""
+    
     @Published var currentSet: Int = 1
     
-    enum RunningState: String {
-        case start = "시작"
-        case rest = "휴식 중"
-        case complete = "완료"
-    }
-    @Published var runningState: RunningState = .start
-    
     init() {
+        $alertMessage.sink { [weak self] _ in
+            self?.alertClosure()
+        }
+        .store(in: &cancellables)
+        
         //  View와 ViewModel runningList 바인딩 처리
         $runningList.sink { [weak self] value in
             self?.runningListClosure(value)
@@ -100,93 +139,68 @@ class SelectRunningViewModel: ObservableObject {
         //  View와 ViewModel selectRunning 바인딩 처리
         $selectRunning.sink { [weak self] value in
             self?.selectRunningClosure(value)
+            if let rest = value?.rest {
+                self?.restTime = rest
+                self?.restTimeString = "\(String(format: "%02d", rest/60)):\(String(format: "%02d", rest%60))"
+            }
         }
         .store(in: &cancellables)
     }
-    func chageRunningState() {
+    
+    //  현재 사용자의 상태에 따라서 행동하는 제스처가 변화된다.
+    func runningStateAction() {
         switch self.runningState {
+            //  사용자가 운동을 시작해야하는 상태
         case.start:
-            startRunning()
-        case.rest:
-            //  이때는 휴식 다 하지 않았다 그래도 다시할거냐? 이렇게 울리기
-            earlyFinishRest()
+            self.startWorkOut()
+            self.runningState = .complete
+            break
+            //  사용자가 운동을 다해서 완료를 이벤트를 기다리는 상태
         case.complete:
-            completeRunning()
+            self.completeSet()
+            self.runningState = .rest
+            break
+            //  완료를 눌러서 휴식 중인 상태
+        case.rest:
+            self.finishRest()
+            break
         }
     }
-    //  시작 버튼을 눌러서 운동을 시작 했을 때
-    //  - 운동 시작이 늘어난다.
-    func startRunning() {
-        //  사용자 클릭 대기 상태
-        runningState = .complete
-        runningTime = 0
-        runningTimer = .scheduledTimer(withTimeInterval: 1, repeats: true, block: { _ in
-            self.runningTime += 1
+    //  운동 시작
+    private func startWorkOut() {
+        runningTimer = .scheduledTimer(withTimeInterval: 0.01, repeats: true, block: { _ in
+            self.runningTime += 0.01
         })
     }
-    //  - 한 세트 완료 후 휴식시간이 시작된다.
-    //  - 세트 수 하나 증가
-    func completeRunning() {
-        guard let selectRunning else {return}
-        if currentSet != selectRunning.set {
-            runningTimer?.invalidate()
-            runningTimer = nil
-            runningState = .rest
-            restTime = selectRunning.rest
-            restTimer = .scheduledTimer(withTimeInterval: 1, repeats: true, block: { _ in
-                self.restTime -= 1
-                if self.restTime == 0 {
-                    self.restTimer?.invalidate()
-                    let setInfo = "\(self.currentSet)&\(self.weight)&\(self.count)&\(self.runningTime)&\(selectRunning.rest-self.restTime)"
-                    self.setInfos.append(setInfo)
-                    self.runningState = .start
-                    self.currentSet += 1
-                }
-            })
+    //  운동 완료
+    private func completeSet() {
+        runningTimer?.invalidate()
+        self.restTimer = .scheduledTimer(withTimeInterval: 1, repeats: true, block: { _ in
+            self.restTime -= 1
+            if self.runningState == .rest {
+                self.restTimeString = "\(String(format: "%02d", self.restTime/60)):\(String(format: "%02d", self.restTime%60))"
+            }
+            else {
+                self.restTimeString = ""
+            }
+            if self.restTime == 0 {
+                self.finishRest()
+            }
+        })
+    }
+    private func finishRest() {
+        if self.restTime != 0 {
+            self.alertMessage = "아직 휴식하셔야합니다.\n바로 진행하시겠습니까?"
         }
-        //  마지막 세트 일 때
         else {
-            self.restTimer?.invalidate()
-            self.finishRunning()
+            self.restAction()
         }
     }
-    func earlyFinishRest() {
-        guard let selectRunning else {return}
+    func restAction() {
         self.restTimer?.invalidate()
-        let setInfo = "\(self.currentSet)&\(self.weight)&\(self.count)&\(self.runningTime)&\(selectRunning.rest-self.restTime)"
-        self.setInfos.append(setInfo)
-        self.restTime = 0
         self.runningState = .start
+        guard let selectRunning else {return}
+        self.restTime = selectRunning.rest
         self.currentSet += 1
     }
-    func isRestRemaining() -> Bool {
-        guard let selectRunning else {return false}
-        if selectRunning.rest == selectRunning.rest-restTime {
-            return false
-        }
-        else {
-            return true
-        }
-    }
-    func isSetRemaining() -> Bool {
-        guard let selectRunning else {return false}
-        if selectRunning.set == self.currentSet {
-            return false
-        }
-        else {
-            return true
-        }
-    }
-    func finishRunning() {
-        guard let selectRunning else {return}
-        let setInfo = "\(self.currentSet)&\(self.weight)&\(self.count)&\(self.runningTime)&\(restTime)"
-        self.setInfos.append(setInfo)
-        self.runningList = self.runningList.filter({$0.id != selectRunning.id})
-        self.completeRunningList.append(selectRunning)
-        self.selectRunning = nil
-    }
-}
-
-class RunningListViewModel: ObservableObject {
-    
 }
