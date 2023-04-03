@@ -127,10 +127,13 @@ struct RunningListView: View {
         .toolbar {
             if selectRunning == nil {
                 ToolbarItem(placement: .navigationBarLeading) {
-                    Button("중단") {
+                    Button {
                         self.vm.alertMessage = "해당 루틴을 중단하시겠습니까?\n(저장되지 않습니다.)"
+                    }label: {
+                        Image(systemName: "chevron.backward")
+                        Text("중단")
                     }
-                    .foregroundColor(.red)
+                    .foregroundColor(.init(uiColor: .systemRed))
                 }
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button("종료") {
@@ -228,17 +231,14 @@ struct SelectRunningView: View {
             }
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button("완료") {
-                    
+                    self.vm.finishExercise()
                 }
             }
         }
-        //  에러 팝업
         .alert("알림", isPresented: $isAlert, actions: {
             Button("취소"){}
             Button("확인"){
-                if vm.alertMessage == "아직 휴식하셔야합니다.\n바로 진행하시겠습니까?" {
-                    self.vm.restAction()
-                }
+                self.vm.alertAction()
             }
         }, message: {
             Text(vm.alertMessage)
