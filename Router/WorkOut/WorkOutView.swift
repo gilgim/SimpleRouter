@@ -186,6 +186,8 @@ extension RunningListView {
 }
 
 struct SelectRunningView: View {
+    @Environment(\.scenePhase) var scenePhase
+    
     @Binding var runningList: [Running]
     @Binding var completeRunningList: [Running]
     @Binding var selectRunning: Running?
@@ -213,11 +215,12 @@ struct SelectRunningView: View {
                     
                     Group {
                         TextField("무게",text: $vm.weightText)
+                            .keyboardType(.decimalPad)
                         TextField("개수",text: $vm.countString)
+                            .keyboardType(.numberPad)
                     }
                     .padding(.horizontal, 120)
                     .multilineTextAlignment(.center)
-                    .disabled(vm.runningState == .rest)
                     
                     Button {
                         vm.runningStateAction()
@@ -232,7 +235,6 @@ struct SelectRunningView: View {
                 }
             }
         }
-
         .navigationTitle(Text(selectRunning?.name ?? "Nothing"))
         .onAppear() {
             self.vm.runningList = self.runningList
@@ -252,6 +254,18 @@ struct SelectRunningView: View {
             
             self.vm.alertClosure = {
                 self.isAlert = true
+            }
+        }
+        .onChange(of: scenePhase) { newScenePhase in
+            switch newScenePhase {
+            case .active:
+                print("Active")
+            case .inactive:
+                print("Inactive")
+            case .background:
+                print("Background")
+            @unknown default:
+                print("Unknown")
             }
         }
         .toolbar {

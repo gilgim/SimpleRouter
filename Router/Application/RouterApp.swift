@@ -16,6 +16,8 @@ import SwiftUI
 @main
 
 struct RouterApp: App {
+    @Environment(\.scenePhase) var scenePhase
+    let event = ContentEvent.shared
     var body: some Scene {
         WindowGroup {
             ContentView()
@@ -23,11 +25,6 @@ struct RouterApp: App {
     }
 }
 
-struct Configuration {
-    struct LargeDevice {
-        let listCircleSize = CGSize(width: 90, height: 90)
-    }
-    struct SmallDevice {
-        let listCircleSize = CGSize(width: 80, height: 80)
-    }
+struct ContentEvent {
+    static let shared = ContentEvent()
 }
