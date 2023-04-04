@@ -10,6 +10,7 @@ import Combine
 
 class ExerciseCreateViewModel: ObservableObject {
     //  ========== 저장될 변수값 ==========
+    @Published var idString: String = ""
     /// 사용자 커스텀 심볼 이름
 	@Published var symbol: String = "figure.walk"
     /// 사용자 커스텀 심볼 색상
@@ -38,7 +39,7 @@ class ExerciseCreateViewModel: ObservableObject {
     func createExercise() {
         guard self.exerciseName != "" else {alertMessage = "운동명을 입력해주세요.";return}
         guard self.exercisePart != "" else {alertMessage = "운동 부위를 입력해주세요.";return}
-        guard !(self.isExistExercise()) else {alertMessage = "존재하는 운동명 입니다.\n이름을 변경해주세요.";return}
+//        guard !(self.isExistExercise()) else {alertMessage = "존재하는 운동명 입니다.\n이름을 변경해주세요.";return}
         
         let realmExercise = RealmExercise()
         realmExercise.exerciseName = self.exerciseName
@@ -56,10 +57,12 @@ class ExerciseCreateViewModel: ObservableObject {
     }
     /// 운동 수정 함수
     func updateExercise() {
+        guard self.exerciseName != "" else {alertMessage = "운동명을 입력해주세요.";return}
         guard self.exercisePart != "" else {alertMessage = "운동 부위를 입력해주세요.";return}
-        if let object = realm().object(ofType: RealmExercise.self, forPrimaryKey: self.exerciseName) {
+        if let object = realm().object(ofType: RealmExercise.self, forPrimaryKey: UUID(uuidString: self.idString)) {
             do {
                 try realm().write({
+                    object.exerciseName = self.exerciseName
                     object.exercisePart = self.exercisePart
                     object.symbolName = self.symbol
                     object.symbolColorHex = self.hex

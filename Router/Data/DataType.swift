@@ -8,10 +8,10 @@
 import Foundation
 import RealmSwift
 
+//  같은 운동이여도 부위별로 다를 수 있음.
 class RealmExercise: Object, Identifiable {
-    let id = UUID()
-    //  중복 이름 방지를 위해 운동이름은 고유값으로 설정해준다.
-    @Persisted(primaryKey: true) var exerciseName: String
+    @Persisted(primaryKey: true) var id = UUID()
+    @Persisted var exerciseName: String
     @Persisted var exercisePart: String
     @Persisted var symbolName: String 
     @Persisted var symbolColorHex: String
@@ -21,6 +21,14 @@ class RealmRoutine: Object, Identifiable {
     let id = UUID()
     @Persisted(primaryKey: true) var routineName: String
     @Persisted var exercisesInfos = List<String>()
+}
+
+class RealmWorkOut: Object, Identifiable {
+    let id = UUID()
+    @Persisted var completeRoutineName: String
+    @Persisted var setInfo = List<String>()
+    @Persisted var completeDate: String
+    
 }
 func realm() -> Realm {
     do {

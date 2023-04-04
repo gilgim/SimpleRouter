@@ -23,6 +23,4 @@ struct Running: Hashable {
     var completeSet: Int
     //  세트넘버&무게&횟수&운동시간&휴식시간
     var completeSetInfos: [String]
-    let weight: Int
-    let count: Int
 }

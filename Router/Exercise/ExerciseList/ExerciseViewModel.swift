@@ -39,7 +39,7 @@ class ExerciseViewModel: ObservableObject {
         self.exercises = []
         let realmExercise = realm().objects(RealmExercise.self)
         let exercises = realmExercise.map({
-            let exercise = Exercise(exerciseName: $0.exerciseName, symbolName: $0.symbolName, symbolColorHex: $0.symbolColorHex, exercisePart: $0.exercisePart)
+            let exercise = Exercise(idString: $0.id.uuidString, exerciseName: $0.exerciseName, symbolName: $0.symbolName, symbolColorHex: $0.symbolColorHex, exercisePart: $0.exercisePart)
             return exercise
         })
         self.exercises = exercises.map({$0})

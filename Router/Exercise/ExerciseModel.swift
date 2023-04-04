@@ -17,6 +17,7 @@ class Exercise: Hashable {
     let restPublisher = PassthroughSubject<Int16, Never>()
     let setPublisher = PassthroughSubject<Int16, Never>()
 
+    let idString: String
 	/// 운동 명
 	let exerciseName: String
 	/// SFSymbol 사용
@@ -31,7 +32,8 @@ class Exercise: Hashable {
     var set: Int16?
     
     /// 운동 변수 설정 및 퍼블리셔 설정
-    init(exerciseName: String = "NotDefine", symbolName: String = "figure.walk", symbolColorHex: String = "3CB371", exercisePart: String = "NotDefine", restTime: Int16? = nil, set: Int16? = nil) {
+    init(idString: String = "", exerciseName: String = "NotDefine", symbolName: String = "figure.walk", symbolColorHex: String = "3CB371", exercisePart: String = "NotDefine", restTime: Int16? = nil, set: Int16? = nil) {
+        self.idString = idString
         self.exerciseName = exerciseName
         self.symbolName = symbolName
         self.symbolColorHex = symbolColorHex

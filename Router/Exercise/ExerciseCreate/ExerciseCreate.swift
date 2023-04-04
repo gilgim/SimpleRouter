@@ -43,7 +43,6 @@ struct ExerciseCreate: View {
                     VStack {
 						TextField("운동명", text: $vm.exerciseName)
                             .modifier(RoundedRectangleModifier())
-                            .disabled(vm.viewType == .modify ? true : false)
 						TextField("부위명", text: $vm.exercisePart)
                             .modifier(RoundedRectangleModifier())
                     }
@@ -68,6 +67,7 @@ struct ExerciseCreate: View {
             }
             if let modifyExercise {
                 vm.viewType = .modify
+                vm.idString = modifyExercise.idString
                 vm.exerciseName = modifyExercise.exerciseName
                 vm.exercisePart = modifyExercise.exercisePart
                 vm.symbol = modifyExercise.symbolName

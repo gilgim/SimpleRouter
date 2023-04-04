@@ -46,6 +46,7 @@ struct RunningListView: View {
     @StateObject var vm: RunningListViewModel = .init()
     
     @State var isAlert: Bool = false
+    @State var isSheetResultPage: Bool = false
     var body: some View {
         ScrollViewWrapper(content:
             HStack(spacing: 30) {
@@ -117,18 +118,37 @@ struct RunningListView: View {
                     }
                 }
                 Spacer(minLength: 30)
-            }
+            },superViewType: .workOut
         )
         .onAppear() {
             self.vm.alertClosure = {
                 self.isAlert = true
             }
+            self.vm.runningList = self.runningList
+            
+            self.vm.$isComplete.sink { value in
+                if value {
+                    self.isSheetResultPage = true
+                }
+            }.store(in: &vm.cancellables)
+            self.vm.$isDismiss.sink { value in
+                if value {
+                    self.mode.wrappedValue.dismiss()
+                }
+            }.store(in: &vm.cancellables)
         }
+        .onChange(of: self.runningList, perform: { _ in
+            self.vm.runningList = self.runningList
+            self.vm.completeRunningList = self.completeRunningList
+            if self.runningList.count == 0 {
+                self.vm.finishRoutine()
+            }
+        })
         .toolbar {
             if selectRunning == nil {
                 ToolbarItem(placement: .navigationBarLeading) {
                     Button {
-                        self.vm.alertMessage = "해당 루틴을 중단하시겠습니까?\n(저장되지 않습니다.)"
+                        self.vm.stopRoutine()
                     }label: {
                         Image(systemName: "chevron.backward")
                         Text("중단")
@@ -137,16 +157,20 @@ struct RunningListView: View {
                 }
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button("종료") {
-                        self.vm.alertMessage = "해당 루틴을 종료하시겠습니까?"
+                        self.vm.finishRoutine()
                     }
                 }
             }
         }
-        //  에러 팝업
+        .sheet(isPresented: $isSheetResultPage, onDismiss: {
+            self.mode.wrappedValue.dismiss()
+        }, content: {
+            ResultPageView()
+        })
         .alert("알림", isPresented: $isAlert, actions: {
             Button("취소", role: .cancel){}
             Button("확인", role: .destructive){
-                self.mode.wrappedValue.dismiss()
+                self.vm.alertAction()
             }
         }, message: {
             Text(vm.alertMessage)
@@ -169,37 +193,47 @@ struct SelectRunningView: View {
     @StateObject var vm = SelectRunningViewModel()
     @State var isAlert: Bool = false
     var body: some View {
-        VStack {
-            if let selectRunning {
-                Text("진행: \(vm.currentSet)/\(selectRunning.set)")
-                    .font(Font.system(size: 20, weight: .semibold, design: .rounded))
-                ZStack {
-                    Circle()
-                    Image(systemName: selectRunning.symbolName)
-                        .resizable()
-                        .scaledToFit()
-                        .padding(50)
-                        .foregroundColor(.white)
-                }
-                .padding(.horizontal, 120)
-                .foregroundColor(.init(hex: selectRunning.symbolHex))
-                HStack {
-                    Text("\(vm.currentSet)세트 수행시간 : \(String(format: "%.2f", vm.runningTime))")
-                    Spacer()
-                }
-                TextField("무게",text: $vm.weightText)
-                Button {
-                    vm.runningStateAction()
-                }label: {
+        ScrollView {
+            VStack {
+                if let selectRunning {
+                    Text("진행: \(vm.currentSet)/\(selectRunning.set)")
+                        .font(Font.system(size: 20, weight: .semibold, design: .rounded))
+                    Text("\(vm.currentSet)세트 : \(self.vm.runningTimeString)")
+                    
                     ZStack {
-                        RoundedRectangle(cornerRadius: 18)
-                            .frame(height: 150)
-                        Text(vm.runningState.rawValue + "\(vm.runningState == .rest ? vm.restTimeString : "")")
+                        Circle()
+                        Image(systemName: selectRunning.symbolName)
+                            .resizable()
+                            .scaledToFit()
+                            .padding(50)
                             .foregroundColor(.white)
+                    }
+                    .padding(.horizontal, 120)
+                    .foregroundColor(.init(hex: selectRunning.symbolHex))
+                    
+                    Group {
+                        TextField("무게",text: $vm.weightText)
+                        TextField("개수",text: $vm.countString)
+                    }
+                    .padding(.horizontal, 120)
+                    .multilineTextAlignment(.center)
+                    .disabled(vm.runningState == .rest)
+                    
+                    Button {
+                        vm.runningStateAction()
+                    }label: {
+                        ZStack {
+                            RoundedRectangle(cornerRadius: 18)
+                                .frame(height: 150)
+                            Text(vm.runningState.rawValue + "\(vm.runningState == .rest ? vm.restTimeString : "")")
+                                .foregroundColor(.white)
+                        }
                     }
                 }
             }
         }
+
+        .navigationTitle(Text(selectRunning?.name ?? "Nothing"))
         .onAppear() {
             self.vm.runningList = self.runningList
             self.vm.runningListClosure = { value in
@@ -231,7 +265,7 @@ struct SelectRunningView: View {
             }
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button("완료") {
-                    self.vm.finishExercise()
+                    self.vm.completeButtonAction()
                 }
             }
         }

@@ -10,8 +10,11 @@ import SwiftUI
 import SnapKit
 
 struct ScrollViewWrapper<Content: View>: UIViewRepresentable {
+    enum SuperViewType {
+        case home, workOut
+    }
     var content: Content
-    
+    var superViewType: SuperViewType
     func makeUIView(context: Context) -> UIScrollView {
         let scrollView = UIScrollView()
         let contentView = UIHostingController(rootView: content)
@@ -43,7 +46,7 @@ struct ScrollViewWrapper<Content: View>: UIViewRepresentable {
             
         }
         func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-            print("asdf")
+            
         }
     }
 }

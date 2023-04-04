@@ -22,7 +22,6 @@ struct SearchBarView: View {
                 else {
                     isKeyBoardOpen = false
                 }
-                print(isKeyBoardOpen)
             }
             Spacer()
             if searchText != "" {

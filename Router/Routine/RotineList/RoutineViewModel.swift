@@ -61,8 +61,8 @@ class RoutineViewModel: ObservableObject {
         var totalSet = 0
         var totalRest = 0
         for exercise in routine.exercises {
-            totalSet += Int(exercise[1])!
-            totalRest += Int(exercise[1])! * Int(exercise[2])!
+            totalSet += Int(exercise[2])!
+            totalRest += Int(exercise[2])! * Int(exercise[3])!
         }
         let minute = totalRest/60
         let second = totalRest%60

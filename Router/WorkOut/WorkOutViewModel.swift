@@ -19,8 +19,8 @@ class WorkOutViewModel: ObservableObject {
         let exerciseInfos = Array(routineObject.exercisesInfos)
         for exerciseInfo in exerciseInfos {
             let exercise = exerciseInfo.split(separator: "&")
-            guard let realmExercise = realm().object(ofType: RealmExercise.self, forPrimaryKey: exercise[0]) else {continue}
-            let running = Running(name: String(exercise[0]), symbolName: realmExercise.symbolName, symbolHex: realmExercise.symbolColorHex, set: Int(exercise[1])!, rest: Int(exercise[2])!, completeSet: 0, completeSetInfos: [], weight: 0, count: 0)
+            guard let realmExercise = realm().object(ofType: RealmExercise.self, forPrimaryKey: UUID(uuidString: String(exercise[0]))) else {continue}
+            let running = Running(name: String(exercise[1]), symbolName: realmExercise.symbolName, symbolHex: realmExercise.symbolColorHex, set: Int(exercise[2])!, rest: Int(exercise[3])!, completeSet: 0, completeSetInfos: [])
             runningList.append(running)
         }
     }
@@ -28,14 +28,45 @@ class WorkOutViewModel: ObservableObject {
 
 class RunningListViewModel: ObservableObject {
     var cancellables = Set<AnyCancellable>()
+    
+    @Published var isDismiss = false
+    @Published var isComplete = false
     @Published var alertMessage: String = "이것은 알림 기본값 입니다."
     var alertClosure: ()->() = {}
+    var alertAction: ()->() = {}
+    
+    //  MARK: 전체 운동 목록
+    @Published var runningList: [Running] = []
+    //  MARK: 완료한 운동 목록
+    @Published var completeRunningList: [Running] = []
     
     init() {
         $alertMessage.sink { [weak self] _ in
             self?.alertClosure()
         }
         .store(in: &cancellables)
+    }
+    func stopRoutine() {
+        self.alertMessage = "해당 루틴을 중단하시겠습니까?\n(저장되지 않습니다.)"
+        self.alertAction = {
+            self.isDismiss = true
+        }
+    }
+    func finishRoutine() {
+        if runningList.count != 0 {
+            self.alertMessage = "모든 운동을 완료하지 않았습니다. 종료하시겠습니까?"
+            self.alertAction = {
+                self.saveWorkOut()
+                self.isComplete = true
+            }
+        }
+        else if runningList.count == 0 {
+            self.saveWorkOut()
+            self.isDismiss = true
+        }
+    }
+    func saveWorkOut() {
+        print(completeRunningList)
     }
 }
 
@@ -74,6 +105,7 @@ class SelectRunningViewModel: ObservableObject {
     }
     //  무게 단위
     @Published var weightUnit: WeightUnit = .kg
+    var weight: Double = 0
     //  저장되는 무게 문자열 값
     @Published var weightString: String = ""
     //  텍스트 필드에서 사용하는 것
@@ -110,7 +142,8 @@ class SelectRunningViewModel: ObservableObject {
     }
     //  1세트 운동 타이머
     var runningTimer: Timer?
-    @Published var runningTime: Double = 0
+    @Published var runningTimeString: String = "00:00:00"
+    @Published var runningTime: Int = 0
     
     //  휴식시간 타이머
     var restTimer: Timer?
@@ -118,7 +151,6 @@ class SelectRunningViewModel: ObservableObject {
     @Published var restTimeString: String = ""
     
     @Published var currentSet: Int = 1
-    
     init() {
         $alertMessage.sink { [weak self] _ in
             self?.alertClosure()
@@ -168,20 +200,26 @@ class SelectRunningViewModel: ObservableObject {
         }
     }
     private func saveSetInfo() {
-        let setInfo = "\(self.currentSet)&\(self.weightString)&\(self.count)&\(self.runningTime)&\(self.restTime)"
-        self.setInfos.append(setInfo)
+        if let selectRunning {
+            self.weight = Double(self.weightString) ?? 0
+            let setInfo = "\(self.currentSet)&\(self.weight)&\(self.count)&\(self.runningTime)&\(selectRunning.rest - self.restTime)"
+            self.setInfos.append(setInfo)
+            self.weightString = ""
+            self.countString = "0"
+        }
     }
     //  운동 시작
     private func startWorkOut() {
-        runningTimer = .scheduledTimer(withTimeInterval: 0.01, repeats: true, block: { _ in
-            self.runningTime += 0.01
+        runningTimer = .scheduledTimer(withTimeInterval: 1, repeats: true, block: { _ in
+            self.runningTime += 1
+            let s = String(format: "%02d", self.runningTime%60)
+            let m = String(format: "%02d", (self.runningTime/60)%60)
+            let h = String(format: "%02d", self.runningTime/60/60)
+            self.runningTimeString = "\(h):\(m):\(s)"
         })
     }
     //  운동 완료
     private func completeSet() {
-        //  세트&무게&개수&세트운동시간&휴식시간
-        self.saveSetInfo()
-        
         if let selectRunning, selectRunning.set <= currentSet {
             self.finishExercise()
             return
@@ -205,7 +243,9 @@ class SelectRunningViewModel: ObservableObject {
         if self.restTime != 0 {
             self.alertMessage = "아직 휴식하셔야합니다.\n바로 진행하시겠습니까?"
             self.alertAction = {
-                self.restAction()
+                if let selectRunning = self.selectRunning, self.currentSet < selectRunning.set {
+                    self.restAction()
+                }
             }
         }
         else {
@@ -216,45 +256,34 @@ class SelectRunningViewModel: ObservableObject {
     private func restAction() {
         self.restTimer?.invalidate()
         self.runningState = .start
+        self.saveSetInfo()
         guard let selectRunning else {return}
         self.restTime = selectRunning.rest
         self.restTimeString = "\(String(format: "%02d", self.restTime/60)):\(String(format: "%02d", self.restTime%60))"
         self.runningTime = 0
+        self.runningTimeString = "00:00:00"
         self.currentSet += 1
     }
     
     //  하나의 운동을 종료하는 함수
     func finishExercise() {
-        if let selectRunning {
-            //  마지막 세트에서 운동 중일 때는 팝업을 띄우지 않고 저장한다.
-            if selectRunning.set == currentSet && runningState == .complete {
-                switch self.runningState {
-                case.complete:
-                    self.saveSetInfo()
-                default:
-                    break
-                }
-                self.runningList = self.runningList.filter({$0.id != selectRunning.id})
-                self.completeRunningList.append(selectRunning)
-                self.selectRunning = nil
-                print(self.setInfos)
-                return
-            }
-            //  나머지 모든 경우에서는 종료 시 팝업을 띄운다.
-            self.alertMessage = "모든 세트를 완료하지 않았습니다. 종료하시겠습니까?"
-            self.alertAction = {
-                switch self.runningState {
-                //  운동 중 일 때는 저장하고 종료한다.
-                case.complete:
-                    self.saveSetInfo()
-                default:
-                    break
-                }
-                self.runningList = self.runningList.filter({$0.id != selectRunning.id})
-                self.completeRunningList.append(selectRunning)
-                self.selectRunning = nil
-            }
-            return
+        guard var selectRunning else {return}
+        self.saveSetInfo()
+        selectRunning.completeSet = currentSet
+        selectRunning.completeSetInfos = setInfos
+        self.runningList = self.runningList.filter({$0.id != selectRunning.id})
+        self.completeRunningList.append(selectRunning)
+        self.completeRunningList = self.completeRunningList
+        self.runningTimer?.invalidate()
+        self.runningTimer = nil
+        self.restTimer?.invalidate()
+        self.restTimer = nil
+        self.selectRunning = nil
+    }
+    func completeButtonAction() {
+        self.alertAction = {
+            self.finishExercise()
         }
+        self.alertMessage = "완료하지 않은 세트가 있습니다.완료하시겠습니까?\n(완료하지 않은 세트는 저장되지 않습니다.)"
     }
 }

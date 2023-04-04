@@ -42,8 +42,13 @@ struct RoutineCreateView: View {
                             //  운동 정보
                             VStack(alignment: .leading) {
                                 //  운동명
-                                Text(exercise.exerciseName)
-                                    .font(Font.system(size: 24, weight: .medium, design: .rounded))
+                                HStack {
+                                    Text(exercise.exerciseName)
+                                        .font(Font.system(size: 24, weight: .medium, design: .rounded))
+                                    Text("<\(exercise.exercisePart)>")
+                                        .font(Font.system(size: 15, weight: .regular, design: .rounded))
+                                        .foregroundColor(.gray)
+                                }
                                 //  운동 세트 & 휴식
                                 HStack {
                                     Text("\(exercise.set ?? 0)세트  |  \(exercise.restTime ?? 0)초")
