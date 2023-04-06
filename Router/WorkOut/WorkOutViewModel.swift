@@ -65,7 +65,7 @@ class RunningListViewModel: ObservableObject {
         }
         else if runningList.count == 0 {
             self.saveWorkOut()
-            self.isDismiss = true
+            self.isComplete = true
         }
     }
     func saveWorkOut() {
@@ -275,8 +275,12 @@ class SelectRunningViewModel: ObservableObject {
         if self.restTime > 0 {
             self.alertMessage = "아직 휴식하셔야합니다.\n바로 진행하시겠습니까?"
             self.alertAction = {
+                guard self.runningState == .rest else {return}
                 if let selectRunning = self.selectRunning, self.currentSet < selectRunning.set {
                     self.restAction()
+                }
+                else {
+                    self.finishExercise()
                 }
             }
         }
@@ -309,6 +313,8 @@ class SelectRunningViewModel: ObservableObject {
         self.runningTimer = nil
         self.restTimer?.invalidate()
         self.restTimer = nil
+        self.backgroundTimer?.invalidate()
+        self.backgroundTimer = nil
         self.selectRunning = nil
     }
     /// 운동 완료 시점에 완료버튼 클릭
@@ -329,15 +335,16 @@ class SelectRunningViewModel: ObservableObject {
             guard restTimer != nil else {return}
             let content = UNMutableNotificationContent()
             content.title = selectRunning.name + " \(currentSet)세트 휴식 완료"
-            content.body = "휴식이 완료되었습니다. 운동을 진행해주세요."
+            content.body = selectRunning.set == currentSet ? "운동이 완료되었습니다. 확인해주세요.":"휴식이 완료되었습니다. 운동을 진행해주세요."
             content.sound = .default
             let trigger = UNTimeIntervalNotificationTrigger(timeInterval: TimeInterval(restTime), repeats: false)
             let request = UNNotificationRequest(identifier: "restFinish", content: content, trigger: trigger)
             UNUserNotificationCenter.current().add(request)
             playNoSound()
-            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + DispatchTimeInterval.seconds(restTime)) {
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + DispatchTimeInterval.seconds(restTime-1)) {
                 self.backgroundTimer = .scheduledTimer(withTimeInterval: 1, repeats: true, block: { _ in
-                    AudioServicesPlaySystemSound(kSystemSoundID_Vibrate)
+//                    AudioServicesPlaySystemSound(kSystemSoundID_Vibrate)
+                    print("Hi")
                 })
             }
         }
