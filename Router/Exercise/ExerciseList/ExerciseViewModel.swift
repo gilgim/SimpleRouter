@@ -46,7 +46,7 @@ class ExerciseViewModel: ObservableObject {
     }
     func deleteExercise() {
         guard let modifyTargetExercise else {alertMessage = "삭제할 수 없습니다.";return}
-        guard let object = realm().object(ofType: RealmExercise.self, forPrimaryKey: modifyTargetExercise.exerciseName) else {alertMessage = "조회 할 수 없습니다.";return}
+        guard let object = realm().object(ofType: RealmExercise.self, forPrimaryKey: UUID(uuidString: modifyTargetExercise.idString)) else {alertMessage = "조회 할 수 없습니다.";return}
         do {
             try realm().write({
                 realm().delete(object)

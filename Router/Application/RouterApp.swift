@@ -12,12 +12,14 @@
 /// 5.  애플 워치 연동해서 폰은 다른 활동을 할 수 있게 한다.
 
 import SwiftUI
+import UserNotifications
+import AVFoundation
+import AudioToolbox
 
 @main
-
+    
 struct RouterApp: App {
-    @Environment(\.scenePhase) var scenePhase
-    let event = ContentEvent.shared
+    @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate: AppDelegate
     var body: some Scene {
         WindowGroup {
             ContentView()
@@ -25,6 +27,41 @@ struct RouterApp: App {
     }
 }
 
-struct ContentEvent {
-    static let shared = ContentEvent()
+class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDelegate {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
+        //  오디오 설정
+        do {
+            try AVAudioSession.sharedInstance().setCategory(AVAudioSession.Category.playback, mode: .default, options: [.mixWithOthers])
+            try AVAudioSession.sharedInstance().setActive(true)
+        } catch {
+            print("Error setting audio session category: \(error.localizedDescription)")
+        }
+        //  알림 설정
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { granted, error in
+            if granted {
+                UNUserNotificationCenter.current().delegate = self
+            }
+        }
+        return true
+    }
+    func application(_ application: UIApplication, configurationForConnecting connectingSceneSession: UISceneSession, options: UIScene.ConnectionOptions) -> UISceneConfiguration {
+        let sceneConfiguration = UISceneConfiguration(name: nil, sessionRole: connectingSceneSession.role)
+        sceneConfiguration.delegateClass = SceneDelegate.self
+        return sceneConfiguration
+    }
+}
+
+class SceneDelegate: UIResponder, UIWindowSceneDelegate {
+    func sceneWillEnterForeground(_ scene: UIScene) {
+        do {
+            try AVAudioSession.sharedInstance().setCategory(AVAudioSession.Category.playback, mode: .default, options: [.mixWithOthers])
+            try AVAudioSession.sharedInstance().setActive(true)
+        } catch {
+            print("Error setting audio session category: \(error.localizedDescription)")
+        }
+
+    }
+    func sceneDidEnterBackground(_ scene: UIScene) {
+       
+    }
 }

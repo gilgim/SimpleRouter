@@ -26,6 +26,8 @@
 		3745072E29B5AD45004A33CD /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3745072D29B5AD45004A33CD /* Error.swift */; };
 		3751807329AC46CE0059183F /* RoutineViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3751807229AC46CE0059183F /* RoutineViewModel.swift */; };
 		3751807529AC48BC0059183F /* RoutineModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3751807429AC48BC0059183F /* RoutineModel.swift */; };
+		3785636329DD067A00598259 /* CommonViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3785636229DD067A00598259 /* CommonViews.swift */; };
+		37A81A5D29DEAD110023B594 /* NoSound.wav in Resources */ = {isa = PBXBuildFile; fileRef = 37A81A5C29DEAD110023B594 /* NoSound.wav */; };
 		37B1902129DBEC7F00D3CF81 /* ResultPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B1902029DBEC7F00D3CF81 /* ResultPageView.swift */; };
 		37B429FB29A83A82003728E1 /* SreachBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B429FA29A83A82003728E1 /* SreachBarView.swift */; };
 		37B429FE29A853B1003728E1 /* ExerciseCreate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B429FD29A853B1003728E1 /* ExerciseCreate.swift */; };
@@ -83,6 +85,8 @@
 		3745072D29B5AD45004A33CD /* Error.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Error.swift; sourceTree = "<group>"; };
 		3751807229AC46CE0059183F /* RoutineViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutineViewModel.swift; sourceTree = "<group>"; };
 		3751807429AC48BC0059183F /* RoutineModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutineModel.swift; sourceTree = "<group>"; };
+		3785636229DD067A00598259 /* CommonViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonViews.swift; sourceTree = "<group>"; };
+		37A81A5C29DEAD110023B594 /* NoSound.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = NoSound.wav; path = ../../../NoSound.wav; sourceTree = "<group>"; };
 		37B1902029DBEC7F00D3CF81 /* ResultPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultPageView.swift; sourceTree = "<group>"; };
 		37B429FA29A83A82003728E1 /* SreachBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SreachBarView.swift; sourceTree = "<group>"; };
 		37B429FD29A853B1003728E1 /* ExerciseCreate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseCreate.swift; sourceTree = "<group>"; };
@@ -198,6 +202,7 @@
 		371C73A029A4B2C100FA1E22 /* Application */ = {
 			isa = PBXGroup;
 			children = (
+				37A81A5C29DEAD110023B594 /* NoSound.wav */,
 				371C737429A4AFB200FA1E22 /* Assets.xcassets */,
 				371C737029A4AFB000FA1E22 /* RouterApp.swift */,
 				371C737229A4AFB000FA1E22 /* ContentView.swift */,
@@ -250,6 +255,7 @@
 				37B42A0329A86FFF003728E1 /* Images.swift */,
 				3745072D29B5AD45004A33CD /* Error.swift */,
 				37263F3329C155D300A0175B /* Enum.swift */,
+				3785636229DD067A00598259 /* CommonViews.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -427,6 +433,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				37A81A5D29DEAD110023B594 /* NoSound.wav in Resources */,
 				371C737829A4AFB200FA1E22 /* Preview Assets.xcassets in Resources */,
 				371C737529A4AFB200FA1E22 /* Assets.xcassets in Resources */,
 			);
@@ -567,6 +574,7 @@
 				3751807529AC48BC0059183F /* RoutineModel.swift in Sources */,
 				C372884229AB938300EDCBA8 /* RoutineCreateView.swift in Sources */,
 				C372884329AB938300EDCBA8 /* RoutineView.swift in Sources */,
+				3785636329DD067A00598259 /* CommonViews.swift in Sources */,
 				3745072C29B5A4A6004A33CD /* DataType.swift in Sources */,
 				37B42A0229A868C5003728E1 /* Extension.swift in Sources */,
 				37B42A0429A86FFF003728E1 /* Images.swift in Sources */,
@@ -744,7 +752,6 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Router/Info.plist;
-				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
@@ -775,7 +782,6 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Router/Info.plist;
-				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";

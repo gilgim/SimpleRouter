@@ -202,13 +202,17 @@ struct SelectRunningView: View {
                         .font(Font.system(size: 20, weight: .semibold, design: .rounded))
                     Text("\(vm.currentSet)세트 : \(self.vm.runningTimeString)")
                     
-                    ZStack {
-                        Circle()
-                        Image(systemName: selectRunning.symbolName)
-                            .resizable()
-                            .scaledToFit()
-                            .padding(50)
-                            .foregroundColor(.white)
+                    Button {
+                        self.vm.stopWorkOut()
+                    }label: {
+                        ZStack {
+                            Circle()
+                            Image(systemName: selectRunning.symbolName)
+                                .resizable()
+                                .scaledToFit()
+                                .padding(50)
+                                .foregroundColor(.white)
+                        }
                     }
                     .padding(.horizontal, 120)
                     .foregroundColor(.init(hex: selectRunning.symbolHex))
@@ -259,11 +263,12 @@ struct SelectRunningView: View {
         .onChange(of: scenePhase) { newScenePhase in
             switch newScenePhase {
             case .active:
-                print("Active")
+                vm.scenePhase.send(.active)
             case .inactive:
-                print("Inactive")
+//                vm.scenePhase.send(.inactive)
+                break
             case .background:
-                print("Background")
+                vm.scenePhase.send(.background)
             @unknown default:
                 print("Unknown")
             }
