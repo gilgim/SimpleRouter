@@ -140,7 +140,7 @@ struct RunningListView: View {
         .onChange(of: self.runningList, perform: { _ in
             self.vm.runningList = self.runningList
             self.vm.completeRunningList = self.completeRunningList
-            if self.runningList.count == 0 {
+            if self.runningList.count == 0 && self.selectRunning == nil {
                 self.vm.finishRoutine()
             }
         })

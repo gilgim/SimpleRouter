@@ -313,8 +313,6 @@ class SelectRunningViewModel: ObservableObject {
         self.runningTimer = nil
         self.restTimer?.invalidate()
         self.restTimer = nil
-        self.backgroundTimer?.invalidate()
-        self.backgroundTimer = nil
         self.selectRunning = nil
     }
     /// 운동 완료 시점에 완료버튼 클릭
@@ -342,10 +340,11 @@ class SelectRunningViewModel: ObservableObject {
             UNUserNotificationCenter.current().add(request)
             playNoSound()
             DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + DispatchTimeInterval.seconds(restTime-1)) {
-                self.backgroundTimer = .scheduledTimer(withTimeInterval: 1, repeats: true, block: { _ in
-//                    AudioServicesPlaySystemSound(kSystemSoundID_Vibrate)
-                    print("Hi")
-                })
+                if self.backgroundTimer == nil {
+                    self.backgroundTimer = .scheduledTimer(withTimeInterval: 1, repeats: true, block: { _ in
+                        AudioServicesPlaySystemSound(kSystemSoundID_Vibrate)
+                    })
+                }
             }
         }
     }
@@ -353,8 +352,6 @@ class SelectRunningViewModel: ObservableObject {
     func intoActive() {
         UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: ["restFinish"])
         stopNoSound()
-        self.backgroundTimer?.invalidate()
-        self.backgroundTimer = nil
         
         let calendar = Calendar.current
         let components = calendar.dateComponents([.hour, .minute, .second], from: Date())
@@ -432,6 +429,8 @@ class SelectRunningViewModel: ObservableObject {
         }
     }
     func stopNoSound() {
-        audioPlayer?.stop()
+        self.audioPlayer?.stop()
+        self.backgroundTimer?.invalidate()
+        self.backgroundTimer = nil
     }
 }
