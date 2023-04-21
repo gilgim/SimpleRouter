@@ -1,0 +1,602 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		37AABA9329F2076900FA12E7 /* SimpleRoutineApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37AABA9229F2076900FA12E7 /* SimpleRoutineApp.swift */; };
+		37AABA9529F2076900FA12E7 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37AABA9429F2076900FA12E7 /* ContentView.swift */; };
+		37AABA9729F2076A00FA12E7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 37AABA9629F2076A00FA12E7 /* Assets.xcassets */; };
+		37AABA9A29F2076A00FA12E7 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 37AABA9929F2076A00FA12E7 /* Preview Assets.xcassets */; };
+		37AABAA029F2076A00FA12E7 /* SimpleRoutine Watch App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 37AABA9F29F2076A00FA12E7 /* SimpleRoutine Watch App.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		37AABAA529F2076A00FA12E7 /* SimpleRoutineApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37AABAA429F2076A00FA12E7 /* SimpleRoutineApp.swift */; };
+		37AABAA729F2076A00FA12E7 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37AABAA629F2076A00FA12E7 /* ContentView.swift */; };
+		37AABAA929F2076A00FA12E7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 37AABAA829F2076A00FA12E7 /* Assets.xcassets */; };
+		37AABAAC29F2076A00FA12E7 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 37AABAAB29F2076A00FA12E7 /* Preview Assets.xcassets */; };
+		37AABAB829F2452600FA12E7 /* WorkOutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37AABAB729F2452600FA12E7 /* WorkOutView.swift */; };
+		37AABABA29F24A5200FA12E7 /* CoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37AABAB929F24A5200FA12E7 /* CoreData.swift */; };
+		37AABABE29F24B5600FA12E7 /* SimpleRoutine.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 37AABABC29F24B5600FA12E7 /* SimpleRoutine.xcdatamodeld */; };
+		37AABAC129F2694900FA12E7 /* WorkOutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37AABAC029F2694900FA12E7 /* WorkOutView.swift */; };
+		37AABAC229F2721F00FA12E7 /* CoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37AABAB929F24A5200FA12E7 /* CoreData.swift */; };
+		37AABAC629F279DA00FA12E7 /* WatchConnectivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37AABAC529F279DA00FA12E7 /* WatchConnectivity.swift */; };
+		37AABAC729F279DA00FA12E7 /* WatchConnectivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37AABAC529F279DA00FA12E7 /* WatchConnectivity.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		37AABAA129F2076A00FA12E7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 37AABA8729F2076900FA12E7 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 37AABA9E29F2076A00FA12E7;
+			remoteInfo = "SimpleRoutine Watch App";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		37AABAB229F2076A00FA12E7 /* Embed Watch Content */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
+			dstSubfolderSpec = 16;
+			files = (
+				37AABAA029F2076A00FA12E7 /* SimpleRoutine Watch App.app in Embed Watch Content */,
+			);
+			name = "Embed Watch Content";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		37AABA8F29F2076900FA12E7 /* SimpleRoutine.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SimpleRoutine.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		37AABA9229F2076900FA12E7 /* SimpleRoutineApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleRoutineApp.swift; sourceTree = "<group>"; };
+		37AABA9429F2076900FA12E7 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		37AABA9629F2076A00FA12E7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		37AABA9929F2076A00FA12E7 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		37AABA9F29F2076A00FA12E7 /* SimpleRoutine Watch App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "SimpleRoutine Watch App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		37AABAA429F2076A00FA12E7 /* SimpleRoutineApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleRoutineApp.swift; sourceTree = "<group>"; };
+		37AABAA629F2076A00FA12E7 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		37AABAA829F2076A00FA12E7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		37AABAAB29F2076A00FA12E7 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		37AABAB729F2452600FA12E7 /* WorkOutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkOutView.swift; sourceTree = "<group>"; };
+		37AABAB929F24A5200FA12E7 /* CoreData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreData.swift; sourceTree = "<group>"; };
+		37AABABD29F24B5600FA12E7 /* SimpleRouter.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = SimpleRouter.xcdatamodel; sourceTree = "<group>"; };
+		37AABAC029F2694900FA12E7 /* WorkOutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkOutView.swift; sourceTree = "<group>"; };
+		37AABAC329F2787C00FA12E7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		37AABAC529F279DA00FA12E7 /* WatchConnectivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchConnectivity.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		37AABA8C29F2076900FA12E7 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		37AABA9C29F2076A00FA12E7 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		37AABA8629F2076900FA12E7 = {
+			isa = PBXGroup;
+			children = (
+				37AABAC429F279BE00FA12E7 /* WatchConnectivity */,
+				37AABABB29F24ADA00FA12E7 /* CoreData */,
+				37AABA9129F2076900FA12E7 /* SimpleRoutine */,
+				37AABAA329F2076A00FA12E7 /* SimpleRoutine Watch App */,
+				37AABA9029F2076900FA12E7 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		37AABA9029F2076900FA12E7 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				37AABA8F29F2076900FA12E7 /* SimpleRoutine.app */,
+				37AABA9F29F2076A00FA12E7 /* SimpleRoutine Watch App.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		37AABA9129F2076900FA12E7 /* SimpleRoutine */ = {
+			isa = PBXGroup;
+			children = (
+				37AABAC329F2787C00FA12E7 /* Info.plist */,
+				37AABA9229F2076900FA12E7 /* SimpleRoutineApp.swift */,
+				37AABA9429F2076900FA12E7 /* ContentView.swift */,
+				37AABABF29F2693500FA12E7 /* WorkOut */,
+				37AABA9629F2076A00FA12E7 /* Assets.xcassets */,
+				37AABA9829F2076A00FA12E7 /* Preview Content */,
+			);
+			path = SimpleRoutine;
+			sourceTree = "<group>";
+		};
+		37AABA9829F2076A00FA12E7 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				37AABA9929F2076A00FA12E7 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		37AABAA329F2076A00FA12E7 /* SimpleRoutine Watch App */ = {
+			isa = PBXGroup;
+			children = (
+				37AABAA429F2076A00FA12E7 /* SimpleRoutineApp.swift */,
+				37AABAA629F2076A00FA12E7 /* ContentView.swift */,
+				37AABAB629F2451200FA12E7 /* WorkOut */,
+				37AABAA829F2076A00FA12E7 /* Assets.xcassets */,
+				37AABAAA29F2076A00FA12E7 /* Preview Content */,
+			);
+			path = "SimpleRoutine Watch App";
+			sourceTree = "<group>";
+		};
+		37AABAAA29F2076A00FA12E7 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				37AABAAB29F2076A00FA12E7 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		37AABAB629F2451200FA12E7 /* WorkOut */ = {
+			isa = PBXGroup;
+			children = (
+				37AABAB729F2452600FA12E7 /* WorkOutView.swift */,
+			);
+			path = WorkOut;
+			sourceTree = "<group>";
+		};
+		37AABABB29F24ADA00FA12E7 /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				37AABABC29F24B5600FA12E7 /* SimpleRoutine.xcdatamodeld */,
+				37AABAB929F24A5200FA12E7 /* CoreData.swift */,
+			);
+			path = CoreData;
+			sourceTree = "<group>";
+		};
+		37AABABF29F2693500FA12E7 /* WorkOut */ = {
+			isa = PBXGroup;
+			children = (
+				37AABAC029F2694900FA12E7 /* WorkOutView.swift */,
+			);
+			path = WorkOut;
+			sourceTree = "<group>";
+		};
+		37AABAC429F279BE00FA12E7 /* WatchConnectivity */ = {
+			isa = PBXGroup;
+			children = (
+				37AABAC529F279DA00FA12E7 /* WatchConnectivity.swift */,
+			);
+			path = WatchConnectivity;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		37AABA8E29F2076900FA12E7 /* SimpleRoutine */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 37AABAB329F2076A00FA12E7 /* Build configuration list for PBXNativeTarget "SimpleRoutine" */;
+			buildPhases = (
+				37AABA8B29F2076900FA12E7 /* Sources */,
+				37AABA8C29F2076900FA12E7 /* Frameworks */,
+				37AABA8D29F2076900FA12E7 /* Resources */,
+				37AABAB229F2076A00FA12E7 /* Embed Watch Content */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				37AABAA229F2076A00FA12E7 /* PBXTargetDependency */,
+			);
+			name = SimpleRoutine;
+			productName = SimpleRoutine;
+			productReference = 37AABA8F29F2076900FA12E7 /* SimpleRoutine.app */;
+			productType = "com.apple.product-type.application";
+		};
+		37AABA9E29F2076A00FA12E7 /* SimpleRoutine Watch App */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 37AABAAF29F2076A00FA12E7 /* Build configuration list for PBXNativeTarget "SimpleRoutine Watch App" */;
+			buildPhases = (
+				37AABA9B29F2076A00FA12E7 /* Sources */,
+				37AABA9C29F2076A00FA12E7 /* Frameworks */,
+				37AABA9D29F2076A00FA12E7 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "SimpleRoutine Watch App";
+			productName = "SimpleRoutine Watch App";
+			productReference = 37AABA9F29F2076A00FA12E7 /* SimpleRoutine Watch App.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		37AABA8729F2076900FA12E7 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1430;
+				LastUpgradeCheck = 1430;
+				TargetAttributes = {
+					37AABA8E29F2076900FA12E7 = {
+						CreatedOnToolsVersion = 14.3;
+					};
+					37AABA9E29F2076A00FA12E7 = {
+						CreatedOnToolsVersion = 14.3;
+					};
+				};
+			};
+			buildConfigurationList = 37AABA8A29F2076900FA12E7 /* Build configuration list for PBXProject "SimpleRoutine" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 37AABA8629F2076900FA12E7;
+			productRefGroup = 37AABA9029F2076900FA12E7 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				37AABA8E29F2076900FA12E7 /* SimpleRoutine */,
+				37AABA9E29F2076A00FA12E7 /* SimpleRoutine Watch App */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		37AABA8D29F2076900FA12E7 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				37AABA9A29F2076A00FA12E7 /* Preview Assets.xcassets in Resources */,
+				37AABA9729F2076A00FA12E7 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		37AABA9D29F2076A00FA12E7 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				37AABAAC29F2076A00FA12E7 /* Preview Assets.xcassets in Resources */,
+				37AABAA929F2076A00FA12E7 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		37AABA8B29F2076900FA12E7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				37AABAC629F279DA00FA12E7 /* WatchConnectivity.swift in Sources */,
+				37AABAC129F2694900FA12E7 /* WorkOutView.swift in Sources */,
+				37AABABE29F24B5600FA12E7 /* SimpleRoutine.xcdatamodeld in Sources */,
+				37AABA9529F2076900FA12E7 /* ContentView.swift in Sources */,
+				37AABABA29F24A5200FA12E7 /* CoreData.swift in Sources */,
+				37AABA9329F2076900FA12E7 /* SimpleRoutineApp.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		37AABA9B29F2076A00FA12E7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				37AABAC729F279DA00FA12E7 /* WatchConnectivity.swift in Sources */,
+				37AABAC229F2721F00FA12E7 /* CoreData.swift in Sources */,
+				37AABAA729F2076A00FA12E7 /* ContentView.swift in Sources */,
+				37AABAA529F2076A00FA12E7 /* SimpleRoutineApp.swift in Sources */,
+				37AABAB829F2452600FA12E7 /* WorkOutView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		37AABAA229F2076A00FA12E7 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 37AABA9E29F2076A00FA12E7 /* SimpleRoutine Watch App */;
+			targetProxy = 37AABAA129F2076A00FA12E7 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		37AABAAD29F2076A00FA12E7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		37AABAAE29F2076A00FA12E7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+			};
+			name = Release;
+		};
+		37AABAB029F2076A00FA12E7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"SimpleRoutine Watch App/Preview Content\"";
+				DEVELOPMENT_TEAM = 3RPG64SDVF;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = SimpleRoutine;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = com.SimpleRoutine;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.SimpleRoutine.watchkitapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 9.4;
+			};
+			name = Debug;
+		};
+		37AABAB129F2076A00FA12E7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"SimpleRoutine Watch App/Preview Content\"";
+				DEVELOPMENT_TEAM = 3RPG64SDVF;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = SimpleRoutine;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = com.SimpleRoutine;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.SimpleRoutine.watchkitapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				VALIDATE_PRODUCT = YES;
+				WATCHOS_DEPLOYMENT_TARGET = 9.4;
+			};
+			name = Release;
+		};
+		37AABAB429F2076A00FA12E7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"SimpleRoutine/Preview Content\"";
+				DEVELOPMENT_TEAM = 3RPG64SDVF;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = SimpleRoutine/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = SimpleRoutine;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.SimpleRoutine;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		37AABAB529F2076A00FA12E7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"SimpleRoutine/Preview Content\"";
+				DEVELOPMENT_TEAM = 3RPG64SDVF;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = SimpleRoutine/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = SimpleRoutine;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.SimpleRoutine;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		37AABA8A29F2076900FA12E7 /* Build configuration list for PBXProject "SimpleRoutine" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				37AABAAD29F2076A00FA12E7 /* Debug */,
+				37AABAAE29F2076A00FA12E7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		37AABAAF29F2076A00FA12E7 /* Build configuration list for PBXNativeTarget "SimpleRoutine Watch App" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				37AABAB029F2076A00FA12E7 /* Debug */,
+				37AABAB129F2076A00FA12E7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		37AABAB329F2076A00FA12E7 /* Build configuration list for PBXNativeTarget "SimpleRoutine" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				37AABAB429F2076A00FA12E7 /* Debug */,
+				37AABAB529F2076A00FA12E7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		37AABABC29F24B5600FA12E7 /* SimpleRoutine.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				37AABABD29F24B5600FA12E7 /* SimpleRouter.xcdatamodel */,
+			);
+			currentVersion = 37AABABD29F24B5600FA12E7 /* SimpleRouter.xcdatamodel */;
+			path = SimpleRoutine.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = 37AABA8729F2076900FA12E7 /* Project object */;
+}
