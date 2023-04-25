@@ -8,6 +8,7 @@
 import Foundation
 import CoreData
 
+//  MARK: 영구 저장소 설정
 class PersistenceController {
     static let shared = PersistenceController()
     

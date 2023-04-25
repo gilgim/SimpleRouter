@@ -9,7 +9,6 @@ import SwiftUI
 import WatchConnectivity
 
 struct WorkOutView: View {
-    
     var body: some View {
         TabView {
             RunningView()

@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3747133C29F7B7AF0048055B /* ExerciseListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3747133B29F7B7AF0048055B /* ExerciseListView.swift */; };
+		3747133D29F7B7AF0048055B /* ExerciseListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3747133B29F7B7AF0048055B /* ExerciseListView.swift */; };
+		3747135929F7C2690048055B /* ExerciseCreateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3747135829F7C2690048055B /* ExerciseCreateView.swift */; };
 		37AABA9329F2076900FA12E7 /* SimpleRoutineApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37AABA9229F2076900FA12E7 /* SimpleRoutineApp.swift */; };
 		37AABA9529F2076900FA12E7 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37AABA9429F2076900FA12E7 /* ContentView.swift */; };
 		37AABA9729F2076A00FA12E7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 37AABA9629F2076A00FA12E7 /* Assets.xcassets */; };
@@ -17,10 +20,10 @@
 		37AABAA929F2076A00FA12E7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 37AABAA829F2076A00FA12E7 /* Assets.xcassets */; };
 		37AABAAC29F2076A00FA12E7 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 37AABAAB29F2076A00FA12E7 /* Preview Assets.xcassets */; };
 		37AABAB829F2452600FA12E7 /* WorkOutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37AABAB729F2452600FA12E7 /* WorkOutView.swift */; };
-		37AABABA29F24A5200FA12E7 /* CoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37AABAB929F24A5200FA12E7 /* CoreData.swift */; };
+		37AABABA29F24A5200FA12E7 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37AABAB929F24A5200FA12E7 /* Persistence.swift */; };
 		37AABABE29F24B5600FA12E7 /* SimpleRoutine.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 37AABABC29F24B5600FA12E7 /* SimpleRoutine.xcdatamodeld */; };
 		37AABAC129F2694900FA12E7 /* WorkOutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37AABAC029F2694900FA12E7 /* WorkOutView.swift */; };
-		37AABAC229F2721F00FA12E7 /* CoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37AABAB929F24A5200FA12E7 /* CoreData.swift */; };
+		37AABAC229F2721F00FA12E7 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37AABAB929F24A5200FA12E7 /* Persistence.swift */; };
 		37AABAC629F279DA00FA12E7 /* WatchConnectivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37AABAC529F279DA00FA12E7 /* WatchConnectivity.swift */; };
 		37AABAC729F279DA00FA12E7 /* WatchConnectivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37AABAC529F279DA00FA12E7 /* WatchConnectivity.swift */; };
 /* End PBXBuildFile section */
@@ -50,6 +53,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		3747133B29F7B7AF0048055B /* ExerciseListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseListView.swift; sourceTree = "<group>"; };
+		3747135829F7C2690048055B /* ExerciseCreateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseCreateView.swift; sourceTree = "<group>"; };
 		37AABA8F29F2076900FA12E7 /* SimpleRoutine.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SimpleRoutine.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		37AABA9229F2076900FA12E7 /* SimpleRoutineApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleRoutineApp.swift; sourceTree = "<group>"; };
 		37AABA9429F2076900FA12E7 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -61,7 +66,7 @@
 		37AABAA829F2076A00FA12E7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		37AABAAB29F2076A00FA12E7 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		37AABAB729F2452600FA12E7 /* WorkOutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkOutView.swift; sourceTree = "<group>"; };
-		37AABAB929F24A5200FA12E7 /* CoreData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreData.swift; sourceTree = "<group>"; };
+		37AABAB929F24A5200FA12E7 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		37AABABD29F24B5600FA12E7 /* SimpleRouter.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = SimpleRouter.xcdatamodel; sourceTree = "<group>"; };
 		37AABAC029F2694900FA12E7 /* WorkOutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkOutView.swift; sourceTree = "<group>"; };
 		37AABAC329F2787C00FA12E7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
@@ -86,6 +91,38 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3747131B29F7B1870048055B /* Exercise */ = {
+			isa = PBXGroup;
+			children = (
+				3747135629F7C24A0048055B /* List */,
+				3747135729F7C2550048055B /* Create */,
+			);
+			path = Exercise;
+			sourceTree = "<group>";
+		};
+		3747131C29F7B1990048055B /* Exercise */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Exercise;
+			sourceTree = "<group>";
+		};
+		3747135629F7C24A0048055B /* List */ = {
+			isa = PBXGroup;
+			children = (
+				3747133B29F7B7AF0048055B /* ExerciseListView.swift */,
+			);
+			path = List;
+			sourceTree = "<group>";
+		};
+		3747135729F7C2550048055B /* Create */ = {
+			isa = PBXGroup;
+			children = (
+				3747135829F7C2690048055B /* ExerciseCreateView.swift */,
+			);
+			path = Create;
+			sourceTree = "<group>";
+		};
 		37AABA8629F2076900FA12E7 = {
 			isa = PBXGroup;
 			children = (
@@ -113,6 +150,7 @@
 				37AABA9229F2076900FA12E7 /* SimpleRoutineApp.swift */,
 				37AABA9429F2076900FA12E7 /* ContentView.swift */,
 				37AABABF29F2693500FA12E7 /* WorkOut */,
+				3747131B29F7B1870048055B /* Exercise */,
 				37AABA9629F2076A00FA12E7 /* Assets.xcassets */,
 				37AABA9829F2076A00FA12E7 /* Preview Content */,
 			);
@@ -133,6 +171,7 @@
 				37AABAA429F2076A00FA12E7 /* SimpleRoutineApp.swift */,
 				37AABAA629F2076A00FA12E7 /* ContentView.swift */,
 				37AABAB629F2451200FA12E7 /* WorkOut */,
+				3747131C29F7B1990048055B /* Exercise */,
 				37AABAA829F2076A00FA12E7 /* Assets.xcassets */,
 				37AABAAA29F2076A00FA12E7 /* Preview Content */,
 			);
@@ -159,7 +198,7 @@
 			isa = PBXGroup;
 			children = (
 				37AABABC29F24B5600FA12E7 /* SimpleRoutine.xcdatamodeld */,
-				37AABAB929F24A5200FA12E7 /* CoreData.swift */,
+				37AABAB929F24A5200FA12E7 /* Persistence.swift */,
 			);
 			path = CoreData;
 			sourceTree = "<group>";
@@ -284,9 +323,11 @@
 			files = (
 				37AABAC629F279DA00FA12E7 /* WatchConnectivity.swift in Sources */,
 				37AABAC129F2694900FA12E7 /* WorkOutView.swift in Sources */,
+				3747135929F7C2690048055B /* ExerciseCreateView.swift in Sources */,
+				3747133C29F7B7AF0048055B /* ExerciseListView.swift in Sources */,
 				37AABABE29F24B5600FA12E7 /* SimpleRoutine.xcdatamodeld in Sources */,
 				37AABA9529F2076900FA12E7 /* ContentView.swift in Sources */,
-				37AABABA29F24A5200FA12E7 /* CoreData.swift in Sources */,
+				37AABABA29F24A5200FA12E7 /* Persistence.swift in Sources */,
 				37AABA9329F2076900FA12E7 /* SimpleRoutineApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -296,9 +337,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				37AABAC729F279DA00FA12E7 /* WatchConnectivity.swift in Sources */,
-				37AABAC229F2721F00FA12E7 /* CoreData.swift in Sources */,
+				37AABAC229F2721F00FA12E7 /* Persistence.swift in Sources */,
 				37AABAA729F2076A00FA12E7 /* ContentView.swift in Sources */,
 				37AABAA529F2076A00FA12E7 /* SimpleRoutineApp.swift in Sources */,
+				3747133D29F7B7AF0048055B /* ExerciseListView.swift in Sources */,
 				37AABAB829F2452600FA12E7 /* WorkOutView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
