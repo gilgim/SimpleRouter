@@ -35,10 +35,8 @@ struct ExerciseListView_Previews: PreviewProvider {
 }
 
 struct QuickCreateExerciseView: View {
-    enum textFieldType {
-        case name, part
-    }
-    @FocusState var textFieldFocus: textFieldType?
+    @State var test: Bool = false
+    @State var test2: Bool = false
     @StateObject var vm: QuickCreateExerciseViewModel = .init()
     var body: some View {
         ZStack {
@@ -63,30 +61,24 @@ struct QuickCreateExerciseView: View {
                     .padding(.trailing, 30)
                 Spacer()
                 VStack(spacing: 5) {
-                    TextField("", text: $vm.inputName)
-                        .fontWeight(.bold)
-                        .foregroundColor(.white)
-                        .tint(.white)
-                        .focused($textFieldFocus, equals: .name)
-                        .placeholder(when: vm.inputName.isEmpty) {
-                            Text("이름").foregroundColor(.white)
-                        }
+                    CustomTextField(text: $vm.inputName, isFocus: vm.namePublisher) {
+                        vm.partPublisher.send(true)
+                    }
+                    .fontWeight(.bold)
+                    .foregroundColor(.white)
+                    .tint(.white)
+                    
                     Divider()
                         .overlay {
                             Color.white
                         }
                         .padding(.bottom, 5)
-                    TextField("", text: $vm.inputPart)
-                        .fontWeight(.bold)
-                        .foregroundColor(.white)
-                        .tint(.white)
-                        .focused($textFieldFocus, equals: .part)
-                        .onSubmit {
-                            vm.quickEditorShowToggle()
-                        }
-                        .placeholder(when: vm.inputPart.isEmpty) {
-                            Text("운동부위").foregroundColor(.white)
-                        }
+                    CustomTextField(text: $vm.inputPart,isFocus: vm.partPublisher) {
+                        vm.quickEditorShowToggle()
+                    }
+                    .fontWeight(.bold)
+                    .foregroundColor(.white)
+                    .tint(.white)
                     Divider()
                         .overlay {
                             Color.white
@@ -123,10 +115,5 @@ struct QuickCreateExerciseView: View {
         .padding(.bottom, 20)
         .animation(.default, value: vm.isShowEditor)
         .animation(.default, value: vm.isCreateExercise())
-        .onAppear() {
-            self.vm.keyboardFocusAction = {
-                self.textFieldFocus = .name
-            }
-        }
     }
 }

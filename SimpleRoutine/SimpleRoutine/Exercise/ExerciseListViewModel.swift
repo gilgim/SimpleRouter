@@ -8,6 +8,7 @@
 import Foundation
 import SwiftUI
 import CoreData
+import Combine
 
 class ExerciseListViewModel: ObservableObject {
     
@@ -18,7 +19,10 @@ class QuickCreateExerciseViewModel: ObservableObject {
     @Published var inputName: String = ""
     @Published var inputPart: String = ""
     @Published var isShowEditor: Bool = false
-    var keyboardFocusAction: () -> () = {}
+    var namePublisher = PassthroughSubject<Bool, Never>()
+    var partPublisher = PassthroughSubject<Bool, Never>()
+    
+    var isNameFocus: Bool = false
     //  내리면 저장 가능
     func quickEditorShowToggle() {
         //  생성
@@ -30,14 +34,12 @@ class QuickCreateExerciseViewModel: ObservableObject {
         inputPart = ""
         //  키보드 내리기
         if self.isShowEditor {
-            self.dismissKeyboard()
+            dismissKeyboard()
         }
-        
         //  키보드 올리기
         else {
-            self.keyboardFocusAction()
+            namePublisher.send(true)
         }
-        
         self.isShowEditor.toggle()
     }
     func isCreateExercise() -> Bool {
