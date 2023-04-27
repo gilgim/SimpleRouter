@@ -12,14 +12,18 @@ struct ContentView: View {
         UITabBar.appearance().backgroundColor = UIColor.white
     }
     var body: some View {
-        TabView {
-            ExerciseListView()
+        NavigationStack {
+            TabView {
+                NavigationView {
+                    ExerciseListView()
+                        .navigationTitle("운동 목록")
+                }
                 .tabItem {
                     Image(systemName: "person.fill")
                     Text("Exercise")
                 }
+            }
         }
-        
     }
 }
 

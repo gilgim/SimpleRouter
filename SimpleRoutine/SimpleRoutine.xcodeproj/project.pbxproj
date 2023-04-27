@@ -26,6 +26,12 @@
 		37AABAC229F2721F00FA12E7 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37AABAB929F24A5200FA12E7 /* Persistence.swift */; };
 		37AABAC629F279DA00FA12E7 /* WatchConnectivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37AABAC529F279DA00FA12E7 /* WatchConnectivity.swift */; };
 		37AABAC729F279DA00FA12E7 /* WatchConnectivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37AABAC529F279DA00FA12E7 /* WatchConnectivity.swift */; };
+		37EC9A1B29F9F0D1003CB04D /* Datas.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EC9A1A29F9F0D1003CB04D /* Datas.swift */; };
+		37EC9A1C29FA2F7E003CB04D /* SimpleRoutine.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 37AABABC29F24B5600FA12E7 /* SimpleRoutine.xcdatamodeld */; };
+		37EC9A1D29FA2FEC003CB04D /* Exetension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37569C3229F8E2CB00777889 /* Exetension.swift */; };
+		37EC9A1E29FA2FF1003CB04D /* Datas.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EC9A1A29F9F0D1003CB04D /* Datas.swift */; };
+		37EC9A2029FA40B6003CB04D /* Codables.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EC9A1F29FA40B6003CB04D /* Codables.swift */; };
+		37EC9A2129FA4831003CB04D /* Codables.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EC9A1F29FA40B6003CB04D /* Codables.swift */; };
 		B0E5A4A529F935A800307516 /* UIViewRepresentables.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0E5A4A429F935A800307516 /* UIViewRepresentables.swift */; };
 /* End PBXBuildFile section */
 
@@ -73,6 +79,8 @@
 		37AABAC029F2694900FA12E7 /* WorkOutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkOutView.swift; sourceTree = "<group>"; };
 		37AABAC329F2787C00FA12E7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		37AABAC529F279DA00FA12E7 /* WatchConnectivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchConnectivity.swift; sourceTree = "<group>"; };
+		37EC9A1A29F9F0D1003CB04D /* Datas.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Datas.swift; sourceTree = "<group>"; };
+		37EC9A1F29FA40B6003CB04D /* Codables.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Codables.swift; sourceTree = "<group>"; };
 		B0E5A4A429F935A800307516 /* UIViewRepresentables.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewRepresentables.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -110,6 +118,8 @@
 				37AABA9429F2076900FA12E7 /* ContentView.swift */,
 				37569C3229F8E2CB00777889 /* Exetension.swift */,
 				B0E5A4A429F935A800307516 /* UIViewRepresentables.swift */,
+				37EC9A1A29F9F0D1003CB04D /* Datas.swift */,
+				37EC9A1F29FA40B6003CB04D /* Codables.swift */,
 			);
 			path = Application;
 			sourceTree = "<group>";
@@ -315,10 +325,12 @@
 				3718CC1D29F89BE6002BA748 /* ExerciseListView.swift in Sources */,
 				37AABABE29F24B5600FA12E7 /* SimpleRoutine.xcdatamodeld in Sources */,
 				B0E5A4A529F935A800307516 /* UIViewRepresentables.swift in Sources */,
+				37EC9A1B29F9F0D1003CB04D /* Datas.swift in Sources */,
 				37AABA9529F2076900FA12E7 /* ContentView.swift in Sources */,
 				37569C3329F8E2CB00777889 /* Exetension.swift in Sources */,
 				37569C3529F8E69500777889 /* ExerciseListViewModel.swift in Sources */,
 				37AABABA29F24A5200FA12E7 /* Persistence.swift in Sources */,
+				37EC9A2029FA40B6003CB04D /* Codables.swift in Sources */,
 				37AABA9329F2076900FA12E7 /* SimpleRoutineApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -329,9 +341,13 @@
 			files = (
 				37AABAC729F279DA00FA12E7 /* WatchConnectivity.swift in Sources */,
 				37AABAC229F2721F00FA12E7 /* Persistence.swift in Sources */,
+				37EC9A1C29FA2F7E003CB04D /* SimpleRoutine.xcdatamodeld in Sources */,
+				37EC9A1E29FA2FF1003CB04D /* Datas.swift in Sources */,
+				37EC9A2129FA4831003CB04D /* Codables.swift in Sources */,
 				37AABAA729F2076A00FA12E7 /* ContentView.swift in Sources */,
 				37AABAA529F2076A00FA12E7 /* SimpleRoutineApp.swift in Sources */,
 				37AABAB829F2452600FA12E7 /* WorkOutView.swift in Sources */,
+				37EC9A1D29FA2FEC003CB04D /* Exetension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

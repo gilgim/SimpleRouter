@@ -8,22 +8,75 @@
 import SwiftUI
 
 struct ExerciseListView: View {
-    @State var text: String = ""
-    @State var isQuickCreateShow: Bool = false
-    @State var isQuickCreateAble: Bool = false
+    @Environment(\.managedObjectContext) private var viewContext
+    @FetchRequest(
+        entity: Exercise.entity(),
+        sortDescriptors: [NSSortDescriptor(keyPath: \Exercise.createAt, ascending: true)]
+    ) private var exercises: FetchedResults<Exercise>
+    
+    @StateObject var vm: ExerciseListViewModel = .init()
+    
+    @State var isWorkOutPush: Bool = false
+    @State var selectExercise: Exercise? = nil
+    
     var body: some View {
-        GeometryReader { geo in
-            VStack {
+        ZStack {
+            VStack(spacing: 0) {
+                Rectangle().frame(height: 40)
                 ScrollView {
-                    LazyVGrid(columns: [
-                        GridItem(.flexible()),
-                        GridItem(.flexible()),
-                        GridItem(.flexible())]) {
-                        
+                    LazyVGrid(columns: [ GridItem(.flexible()), GridItem(.flexible()), GridItem(.flexible())], spacing: 24) {
+                        ForEach(exercises) { exercise in
+                            VStack(spacing: 0) {
+                                Text(exercise.part ?? "nothing")
+                                    .lineLimit(1)
+                                Menu {
+                                    Button {
+                                        self.selectExercise = exercise
+                                        self.isWorkOutPush.toggle()
+                                    }label: {
+                                        Label("운동", systemImage: "figure.run")
+                                    }
+                                    
+                                    Button {
+                                        
+                                    }label: {
+                                        Label("수정", systemImage: "pencil")
+                                    }
+                                    
+                                    Section {
+                                        Button(role: .destructive) {
+                                            self.vm.deleteExercise(exercise: exercise)
+                                        }label: {
+                                            Label("삭제", systemImage: "trash")
+                                        }
+                                    }
+                                } label: {
+                                    ZStack {
+                                        Circle().foregroundColor(.init(hex: exercise.colorHex ?? "3CB371"))
+                                        Image(systemName: exercise.symbolName ?? "figure.walk")
+                                            .resizable()
+                                            .scaledToFit()
+                                            .frame(width: 50, height: 50)
+                                            .foregroundColor(.white)
+                                    }
+                                }
+                                Text(exercise.name ?? "nothing")
+                                    .lineLimit(1)
+                            }
+                            .frame(width: 100)
+                        }
                     }
+                    .padding(.horizontal, 16)
+                    Spacer().frame(height: 40)
                 }
+            }
+            VStack {
+                Spacer()
                 QuickCreateExerciseView()
             }
+        }
+        .navigationDestination(isPresented: $isWorkOutPush) {
+            WorkOutView(exercise: $selectExercise)
         }
     }
 }
@@ -35,8 +88,6 @@ struct ExerciseListView_Previews: PreviewProvider {
 }
 
 struct QuickCreateExerciseView: View {
-    @State var test: Bool = false
-    @State var test2: Bool = false
     @StateObject var vm: QuickCreateExerciseViewModel = .init()
     var body: some View {
         ZStack {
@@ -57,11 +108,24 @@ struct QuickCreateExerciseView: View {
             }
             
             HStack {
-                Circle().foregroundColor(.white)
-                    .padding(.trailing, 30)
+                Button {
+                    vm.changeSymbolAndColor()
+                }label: {
+                    ZStack {
+                        Circle().foregroundColor(.init(hex: vm.randomColorHex))
+                        Image(systemName: vm.randomSymbolName)
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 35,height: 35)
+                            .foregroundColor(.white)
+                            .opacity(vm.isShowEditor ? 1 : 0)
+                    }
+                }
+                .padding(.trailing, 30)
+                
                 Spacer()
                 VStack(spacing: 5) {
-                    CustomTextField(text: $vm.inputName, isFocus: vm.namePublisher) {
+                    CustomTextField("운동이름", text: $vm.inputName, isFocus: vm.namePublisher) {
                         vm.partPublisher.send(true)
                     }
                     .fontWeight(.bold)
@@ -73,7 +137,7 @@ struct QuickCreateExerciseView: View {
                             Color.white
                         }
                         .padding(.bottom, 5)
-                    CustomTextField(text: $vm.inputPart,isFocus: vm.partPublisher) {
+                    CustomTextField("운동부위", text: $vm.inputPart,isFocus: vm.partPublisher) {
                         vm.quickEditorShowToggle()
                     }
                     .fontWeight(.bold)
@@ -86,9 +150,6 @@ struct QuickCreateExerciseView: View {
                 }
                 .padding(.trailing, 30)
             }
-            .animation(.default, value: vm.isShowEditor)
-            .animation(.default, value: vm.isCreateExercise())
-            
             .frame(height: 80)
             .padding(.horizontal, 16)
             .padding(.top,20)
@@ -110,10 +171,10 @@ struct QuickCreateExerciseView: View {
             }
         }
         .frame(height: 120)
-        .offset(y:vm.isShowEditor ? 0 : 110)
         .padding(.horizontal,16)
-        .padding(.bottom, 20)
+        .padding(.bottom, vm.isShowEditor ? 20 : -95)
         .animation(.default, value: vm.isShowEditor)
         .animation(.default, value: vm.isCreateExercise())
+        .background(.clear)
     }
 }
