@@ -8,8 +8,30 @@
 import SwiftUI
 
 struct ContentView: View {
+    enum ViewType {
+        case exercise, routine
+    }
     var body: some View {
-        WorkOutView()
+        NavigationStack {
+            VStack {
+                NavigationLink(value: ViewType.exercise) {
+                    Text("운동목록")
+                }
+                NavigationLink(value: ViewType.routine) {
+                    Text("루틴목록")
+                }
+            }
+            .navigationDestination(for: ViewType.self) {
+                switch $0 {
+                case .exercise:
+                    NavigationView {
+                        ExerciseListView()
+                    }
+                case .routine:
+                    ExerciseListView()
+                }
+            }
+        }
     }
 }
 

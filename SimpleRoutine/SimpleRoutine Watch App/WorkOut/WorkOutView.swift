@@ -12,83 +12,39 @@ import WatchConnectivity
 
 struct WorkOutView: View {
     @ObservedObject private var connectivityManager = WatchConnectivityManager.shared
-    @Environment(\.managedObjectContext) private var viewContext
-    @FetchRequest(
-        entity: Exercise.entity(),
-        sortDescriptors: [NSSortDescriptor(keyPath: \Exercise.createAt, ascending: true)]
-    ) private var exercises: FetchedResults<Exercise>
+    @State var selectExercise: Exercise? = nil
+    @State var isRunning = false
     var body: some View {
-        TabView {
-            RunningView()
-            ScrollView(.horizontal, showsIndicators: false) {
-                HStack {
-                    ForEach(exercises) { exercise in
-                        VStack(spacing: 0) {
-                            Button {
-                                
-                            } label: {
-                                ZStack {
-                                    Circle().foregroundColor(.init(hex: exercise.colorHex ?? "3CB371"))
-                                    Image(systemName: exercise.symbolName ?? "figure.walk")
-                                        .resizable()
-                                        .scaledToFit()
-                                        .frame(width: 50, height: 50)
-                                        .foregroundColor(.white)
-                                }
-                            }
+        if let selectExercise {
+            ScrollView {
+                VStack {
+                    Text("세트와 휴식을 설정해주세요.")
+                    Button {
+                        selectExercise.restTime = 90
+                        selectExercise.numberOfSets = 5
+                        isRunning.toggle()
+                    }label: {
+                        ZStack {
+                            Text("기본세트")
+                                .fontWeight(.bold)
                         }
-                        .frame(width: 100)
                     }
                 }
-            }
-            .overlay {
-                if exercises.isEmpty {
-                    Text("iPhone에서 운동을 생성해주세요.")
-                        .frame(height: 100)
+                .navigationDestination(isPresented: $isRunning) {
+                    RunningView(selectExercise: selectExercise)
                 }
             }
         }
-        .onAppear() {
-            connectivityManager.exerciseSendAction = { object in
-                withAnimation {
-                    let fetchRequest: NSFetchRequest<Exercise> = Exercise.fetchRequest()
-                    let context = PersistenceController.shared.container.viewContext
-                    let exercise = try? JSONDecoder().decode(ExerciseCodable.self,from: object)
-                    if let exercise = exercise {
-                        switch exercise.dataType  {
-                        case "c":
-                            do {
-    //                            let exercises = try context.fetch(fetchRequest)
-    //                            for exercise in exercises {
-    //                                context.delete(exercise)
-    //                            }
-                                let coreExercise = Exercise(context: context)
-                                coreExercise.convertExercise(codable: exercise)
-                                try context.save()
-                            }
-                            catch {
-                                
-                            }
-                        case "r":
-                            break
-                        case "u":
-                            break
-                        case "d":
-                            do {
-                                let exercises = try context.fetch(fetchRequest)
-                                let target = exercises.filter({$0.id == exercise.id})
-                                guard !(target.isEmpty) else {return}
-                                context.delete(target[0])
-                                try context.save()
-                            }
-                            catch {
-                                
-                            }
-                            break
-                        default:
-                            break
-                        }
-                    }
+        //  임시로직
+        else {
+            ScrollView(.horizontal) {
+                HStack {
+                    Text("목록1")
+                    Text("목록2")
+                    Text("목록3")
+                    Text("목록4")
+                    Text("목록5")
+                    Text("목록6")
                 }
             }
         }
@@ -96,9 +52,24 @@ struct WorkOutView: View {
 }
 struct RunningView: View {
     @ObservedObject private var connectivityManager = WatchConnectivityManager.shared
+    @State var selectExercise: Exercise
+    @State var vm: RunningViewModel = .init()
     var body: some View {
-        Button("Test Button") {
-            WatchConnectivityManager.shared.sendMessage("Test")
+        VStack {
+            Text(selectExercise.name!)
+                .fontWeight(.bold)
+                .padding(.top,10)
+            Spacer()
+            Text("00:00:00")
+            Button {
+                
+            }label: {
+                Text("시작")
+            }
+            .tint(.blue)
+        }
+        .onAppear() {
+            self.vm.exercise = selectExercise
         }
     }
 }
