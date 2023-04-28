@@ -53,18 +53,25 @@ struct WorkOutView: View {
 struct RunningView: View {
     @ObservedObject private var connectivityManager = WatchConnectivityManager.shared
     @State var selectExercise: Exercise
-    @State var vm: RunningViewModel = .init()
+    @StateObject var vm: RunningViewModel = .init()
+    @State var isStart: Bool = false
     var body: some View {
         VStack {
             Text(selectExercise.name!)
                 .fontWeight(.bold)
                 .padding(.top,10)
             Spacer()
-            Text("00:00:00")
+            Text("\(vm.runningTime)")
             Button {
-                
+                isStart.toggle()
+                if isStart {
+                    vm.runningStart()
+                }
+                else {
+                    vm.runningStop()
+                }
             }label: {
-                Text("시작")
+                Text(isStart ? "완료" : "시작")
             }
             .tint(.blue)
         }
