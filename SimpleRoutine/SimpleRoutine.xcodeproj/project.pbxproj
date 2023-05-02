@@ -35,6 +35,7 @@
 		37EC9A1E29FA2FF1003CB04D /* Datas.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EC9A1A29F9F0D1003CB04D /* Datas.swift */; };
 		37EC9A2029FA40B6003CB04D /* Codables.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EC9A1F29FA40B6003CB04D /* Codables.swift */; };
 		37EC9A2129FA4831003CB04D /* Codables.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EC9A1F29FA40B6003CB04D /* Codables.swift */; };
+		B059F66B2A010651005D72C5 /* NumberPad.swift in Sources */ = {isa = PBXBuildFile; fileRef = B059F66A2A010651005D72C5 /* NumberPad.swift */; };
 		B0E5A4A529F935A800307516 /* UIViewRepresentables.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0E5A4A429F935A800307516 /* UIViewRepresentables.swift */; };
 /* End PBXBuildFile section */
 
@@ -87,6 +88,7 @@
 		37C5819429FBB3B2000A37E4 /* WorkOutViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkOutViewModel.swift; sourceTree = "<group>"; };
 		37EC9A1A29F9F0D1003CB04D /* Datas.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Datas.swift; sourceTree = "<group>"; };
 		37EC9A1F29FA40B6003CB04D /* Codables.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Codables.swift; sourceTree = "<group>"; };
+		B059F66A2A010651005D72C5 /* NumberPad.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberPad.swift; sourceTree = "<group>"; };
 		B0E5A4A429F935A800307516 /* UIViewRepresentables.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewRepresentables.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -176,6 +178,7 @@
 			children = (
 				37AABAA429F2076A00FA12E7 /* SimpleRoutineApp.swift */,
 				37AABAA629F2076A00FA12E7 /* ContentView.swift */,
+				B059F6692A010621005D72C5 /* Common */,
 				37C5818F29FB95A7000A37E4 /* Exercise */,
 				37AABAB629F2451200FA12E7 /* WorkOut */,
 				37AABAA829F2076A00FA12E7 /* Assets.xcassets */,
@@ -233,6 +236,14 @@
 				37C5819229FB975C000A37E4 /* ExerciseListViewModel.swift */,
 			);
 			path = Exercise;
+			sourceTree = "<group>";
+		};
+		B059F6692A010621005D72C5 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				B059F66A2A010651005D72C5 /* NumberPad.swift */,
+			);
+			path = Common;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -358,6 +369,7 @@
 			files = (
 				37C5819529FBB3B2000A37E4 /* WorkOutViewModel.swift in Sources */,
 				37AABAC729F279DA00FA12E7 /* WatchConnectivity.swift in Sources */,
+				B059F66B2A010651005D72C5 /* NumberPad.swift in Sources */,
 				37AABAC229F2721F00FA12E7 /* Persistence.swift in Sources */,
 				37C5819329FB975C000A37E4 /* ExerciseListViewModel.swift in Sources */,
 				37EC9A1C29FA2F7E003CB04D /* SimpleRoutine.xcdatamodeld in Sources */,
