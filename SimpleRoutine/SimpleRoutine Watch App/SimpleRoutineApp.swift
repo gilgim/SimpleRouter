@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-
 @main
 struct SimpleRoutine_Watch_AppApp: App {
     let persistenceController = PersistenceController.shared

@@ -12,15 +12,20 @@ struct ExerciseListView: View {
     @Environment(\.managedObjectContext) private var viewContext
     @FetchRequest(entity: Exercise.entity(), sortDescriptors: [NSSortDescriptor(keyPath: \Exercise.createAt, ascending: true)]
     ) private var exercises: FetchedResults<Exercise>
-    
     @StateObject var vm = ExerciseListViewModel()
+    
+    @State var selectExercise: Exercise?
+    @State var isSheet: Bool = false
+    @State var isRunning: Bool = false
+    
     var body: some View {
         ScrollView(.horizontal, showsIndicators: false) {
             HStack {
                 ForEach(exercises) { exercise in
                     VStack(spacing: 0) {
-                        NavigationLink {
-                            WorkOutView(selectExercise: exercise)
+                        Button {
+                            selectExercise = exercise
+                            isSheet = true
                         } label: {
                             ZStack {
                                 Circle().foregroundColor(.init(hex: exercise.colorHex ?? "3CB371"))
@@ -36,6 +41,14 @@ struct ExerciseListView: View {
                 }
             }
         }
+        .navigationDestination(isPresented: $isRunning, destination: {
+            if let selectExercise {
+                RunningView(exercise: selectExercise)
+            }
+        })
+        .sheet(isPresented: $isSheet, content: {
+            SetRestView(seletedExercise: self.selectExercise, isRunning: $isRunning)
+        })
         .overlay {
             if exercises.isEmpty {
                 Text("iPhone에서 운동을 생성해주세요.")
