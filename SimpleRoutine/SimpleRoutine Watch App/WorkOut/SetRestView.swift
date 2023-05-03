@@ -72,7 +72,7 @@ struct SetRestView: View {
                 isRunning = true
             }
         }) {
-            NumberPad(title: "휴식", isShow: $isRestViewShow, numberString: $restTime)
+            NumberPad(title: "휴식시간", isShow: $isRestViewShow, numberString: $restTime)
         }
     }
 }

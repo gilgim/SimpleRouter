@@ -13,66 +13,67 @@ struct NumberPad: View {
     @Binding var isShow: Bool
     @Binding var numberString: String
     var body: some View {
-        VStack {
-            Text(numberString)
-                .frame(height: 20)
-            LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible()), GridItem(.flexible())]) {
-                ForEach(1..<10) { number in
-                    Button {
-                        if numberString.count < 3 {
-                            numberString += String(number)
-                        }
-                    }label: {
-                        ZStack {
-                            RoundedRectangle(cornerRadius: 13)
-                                .foregroundColor(.gray)
-                            Text("\(number)")
-                                .padding(4)
-                        }
-                    }
-                }
-                Button{
-                    if numberString != "" {
-                        numberString.removeLast()
+        LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible()), GridItem(.flexible())]) {
+            ForEach(1..<10) { number in
+                Button {
+                    if numberString.count < 3 {
+                        numberString += String(number)
                     }
                 }label: {
                     ZStack {
                         RoundedRectangle(cornerRadius: 13)
                             .foregroundColor(.gray)
-                        Image(systemName: "delete.left")
-                            .foregroundColor(.red)
-                    }
-                }
-                Button{
-                    if numberString != "" && numberString.count < 3 {
-                        numberString += "0"
-                    }
-                }label: {
-                    ZStack {
-                        RoundedRectangle(cornerRadius: 13)
-                            .foregroundColor(.gray)
-                        Text("0")
-                            .padding(4)
-                    }
-                }
-                Button{
-                    withAnimation {
-                        self.isShow = false
-                    }
-                }label: {
-                    ZStack {
-                        RoundedRectangle(cornerRadius: 13)
-                            .foregroundColor(.gray)
-                        Image(systemName: "plus")
+                        Text("\(number)")
+                            .padding(8)
                     }
                 }
             }
-            .buttonStyle(.plain)
+            Button{
+                if numberString != "" {
+                    numberString.removeLast()
+                }
+            }label: {
+                ZStack {
+                    RoundedRectangle(cornerRadius: 13)
+                        .foregroundColor(.gray)
+                    Image(systemName: "delete.left")
+                        .foregroundColor(.red)
+                }
+            }
+            Button{
+                if numberString != "" && numberString.count < 3 {
+                    numberString += "0"
+                }
+            }label: {
+                ZStack {
+                    RoundedRectangle(cornerRadius: 13)
+                        .foregroundColor(.gray)
+                    Text("0")
+                        .padding(8)
+                }
+            }
+            Button{
+                withAnimation {
+                    self.isShow = false
+                }
+            }label: {
+                ZStack {
+                    RoundedRectangle(cornerRadius: 13)
+                        .foregroundColor(.gray)
+                    Image(systemName: "plus")
+                }
+            }
         }
+        .padding(.top, 30)
+        .buttonStyle(.plain)
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItem(placement: .destructiveAction) {
-                Text(title)
+                HStack{
+                    Text(numberString)
+                    Spacer()
+                    Text(title)
+                }
             }
             ToolbarItem(placement: .cancellationAction) {
                 Button {
